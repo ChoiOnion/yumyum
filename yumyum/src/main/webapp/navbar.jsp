@@ -15,6 +15,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>냠냠북클럽</title>
     <style>
+    @font-face {
+            font-family: 'Cafe24Ssurround';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        body {
+            font-family: 'Cafe24Ssurround', serif; /* 글꼴 지정 */
+        }
         /* 헤더 스타일 */
         header {
             background-color: #ff916f92; /* 배경색 */
@@ -92,7 +101,7 @@
         <ul class="lists">
             <li><a href="main.jsp">도서 검색</a></li>
             <li><a href="discussionBoard.html">독서 토론 게시판</a></li>
-            <li><a href="meetingBoard.html">독서 모임 게시판</a></li>
+            <li><a href="bookClubBoard.html">독서 모임 게시판</a></li>
             <li class="dropdown_main">
                 <a href="readingRecords.html">독서 기록 페이지</a>
                 <div class="dropdown_menu">

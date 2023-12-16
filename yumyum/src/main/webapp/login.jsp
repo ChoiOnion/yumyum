@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,44 +10,44 @@
  
 <body>
     <header>
-        <h1 class="heading">≥»≥» ∫œ≈¨∑¥</h1>
+        <h1 class="heading">ÎÉ†ÎÉ† Î∂ÅÌÅ¥ÎüΩ</h1>
     </header>
  
     <div class="container">
         <div class="slider"></div>
         <div class="btn">
-            <button class="login">∑Œ±◊¿Œ</button>
-            <button class="signup">»∏ø¯∞°¿‘</button>
+            <button class="login">Î°úÍ∑∏Ïù∏</button>
+            <button class="signup">ÌöåÏõêÍ∞ÄÏûÖ</button>
         </div>
  
         <div class="form-section">
             <!-- Existing login form (previous code) -->
             <div class="login-box">
                 <form method="post" action="loginAction.jsp">
-                    <input type="text" class="email ele" name="userId" placeholder="æ∆¿Ãµ">
-                    <input type="password" class="password ele" name="userPassword" placeholder="∫Òπ–π¯»£">
+                    <input type="text" class="email ele" name="userId" placeholder="ÏïÑÏù¥Îîî">
+                    <input type="password" class="password ele" name="userPassword" placeholder="ÎπÑÎ∞ÄÎ≤àÌò∏">
                     <button class="clkbtn" type="submit">Login</button>
                 </form>
             </div>
  
-            <!-- »∏ø¯∞°¿‘ ∆˚ -->
+            <!-- ÌöåÏõêÍ∞ÄÏûÖ Ìèº -->
             <div class="signup-box">
                 <form method="post" action="joinAction.jsp">
-                    <input type="text" class="name ele" name="userId" placeholder="æ∆¿Ãµ">
-                    <input type="password" class="password ele" name="userPassword" placeholder="∫Òπ–π¯»£">
-                    <input type="text" class="name ele" name="userName" placeholder="¿Ã∏ß">
-                    <input type="email" class="email ele" name="userEmail" placeholder="¿Ã∏ﬁ¿œ">
-                    <input type="text" class="name ele" name="userPhone" placeholder="¿¸»≠π¯»£">
+                    <input type="text" class="name ele" name="userId" placeholder="ÏïÑÏù¥Îîî">
+                    <input type="password" class="password ele" name="userPassword" placeholder="ÎπÑÎ∞ÄÎ≤àÌò∏">
+                    <input type="text" class="name ele" name="userName" placeholder="Ïù¥Î¶Ñ">
+                    <input type="email" class="email ele" name="userEmail" placeholder="Ïù¥Î©îÏùº">
+                    <input type="text" class="name ele" name="userPhone" placeholder="Ï†ÑÌôîÎ≤àÌò∏">
                     <div class="form-group mb-3">
                         <div class="btn-group" data-toggle="buttons">
-                            <input type="radio" class="btn-check" name="userSex" id="≥≤¿⁄" value="≥≤¿⁄" autocomplete="off" checked>
-                            <label class="btn btn-secondary" for="≥≤¿⁄">≥≤¿⁄</label>
-                            <input type="radio" class="btn-check" name="userSex" id="ø©¿⁄" value="ø©¿⁄" autocomplete="off">
-                            <label class="btn btn-secondary" for="ø©¿⁄">ø©¿⁄</label>
+                            <input type="radio" class="btn-check" name="userSex" id="ÎÇ®Ïûê" value="ÎÇ®Ïûê" autocomplete="off" checked>
+                            <label class="btn btn-secondary" for="ÎÇ®Ïûê">ÎÇ®Ïûê</label>
+                            <input type="radio" class="btn-check" name="userSex" id="Ïó¨Ïûê" value="Ïó¨Ïûê" autocomplete="off">
+                            <label class="btn btn-secondary" for="Ïó¨Ïûê">Ïó¨Ïûê</label>
                         </div>
                     </div>
                     
-                    <button class="clkbtn" type="submit">»∏ø¯∞°¿‘</button>
+                    <button class="clkbtn" type="submit">ÌöåÏõêÍ∞ÄÏûÖ</button>
                 </form>
             </div>
         </div>

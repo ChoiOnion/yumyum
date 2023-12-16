@@ -14,7 +14,7 @@
     %>
     
     <script>
-        location.href = 'longin.jsp';
+        location.href = 'login.jsp';
     </script>
 </body>
 </html>
