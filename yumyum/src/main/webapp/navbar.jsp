@@ -92,7 +92,7 @@
         <ul class="lists">
             <li><a href="main.jsp">도서 검색</a></li>
             <li><a href="discussionBoard.html">독서 토론 게시판</a></li>
-            <li><a href="bookClubBoard.html">독서 모임 게시판</a></li>
+            <li><a href="meetingBoard.html">독서 모임 게시판</a></li>
             <li class="dropdown_main">
                 <a href="readingRecords.html">독서 기록 페이지</a>
                 <div class="dropdown_menu">
