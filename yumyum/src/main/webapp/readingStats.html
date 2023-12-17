@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>통계</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+  </head>
+  <body>
+    <button><a href="main.jsp">메인</a></button><br>
+    <!-- 너비(width), 높이(height) 설정 -->
+    <div id="main" style="width: 600px;height:400px;"></div>
+    <!-- 초기화 및 차트 옵션 설정 -->
+    <script>
+    var bookCount;
+        function loadStats() {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    var responseData = xmlhttp.responseText.split('\n');
+                    var oneBookCount = responseData[0];
+                    var twoBookCount = responseData[1];
+                    var threeBookCount = responseData[2];
+
+                    //window.alert(oneBookCount+" "+twoBookCount+" "+threeBookCount);
+
+
+                    // 1. 준비한 DOM 컨테이너에서 echarts 초기화하기
+                    let myChart = echarts.init(document.getElementById('main'))
+
+                    // 2. 차트 옵션 작성하기
+                    let option = {
+                      // 차트 제목
+                      title: {
+                        text: '지난 세 달의 읽은 권 수를 알려드려요',
+                      },
+                      // 범례명
+                      legend: {
+                        data: ['권'],
+                        top: 20,
+                      },
+                      // x축 라벨
+                      xAxis: {
+                        data: ['저저번달', '저번달', '이번달'],
+                      },
+                      yAxis: {},
+                      series: [
+                        {
+                          name: '개수',
+                          type: 'bar', // 막대 그래프
+                          data: [threeBookCount, twoBookCount, oneBookCount],
+                        },
+                      ],
+                    }
+
+                    myChart.setOption(option)
+                }
+            };
+            xmlhttp.open("GET", "getStats.jsp", true);
+            xmlhttp.send();
+        }
+
+
+        // 페이지 로딩 시 게시판 목록을 가져옴
+        window.onload = function() {
+            loadStats();
+        };
+    </script>
+  </body>
+</html>
