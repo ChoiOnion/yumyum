@@ -22,6 +22,8 @@
             Connection conn = null;
             PreparedStatement pstmt = null;
             ResultSet rs = null;
+            PreparedStatement pstmtComments = null;
+            ResultSet rsComments = null;
 
             try {
                 String dbURL = "jdbc:mysql://localhost:3306/nyamnyam";
@@ -31,7 +33,6 @@
                 Class.forName(driverName);
                 conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
 
-                // 해당 게시글 조회
                 String sql = "SELECT * FROM discussion WHERE num = ?";
                 pstmt = conn.prepareStatement(sql);
                 pstmt.setInt(1, num);
@@ -43,15 +44,37 @@
                     String text = rs.getString("text");
                     String date = new SimpleDateFormat("yyyy-MM-dd").format(rs.getTimestamp("date"));
 
+                    String commentSql = "SELECT * FROM comment WHERE num = ?";
+                    pstmtComments = conn.prepareStatement(commentSql);
+                    pstmtComments.setInt(1, num);
+                    rsComments = pstmtComments.executeQuery();
 %>
                     <h2><%= title %></h2>
                     <p>작성자: <%= id %></p>
                     <p>작성 날짜: <%= date %></p>
                     <p>내용: <%= text %></p>
                     <button><a href="discussionBoard.html">글 목록</a></button>
+                    <hr>
+                     <ul>
+<%
+                    while (rsComments.next()) {
+                        String commentUserId = rsComments.getString("id");
+                        String commentText = rsComments.getString("text");
+                        String commentDate = new SimpleDateFormat("yyyy-MM-dd").format(rsComments.getTimestamp("date"));
+%>
+                        <li><strong><%= commentUserId %></strong>: <%= commentText %> (작성일: <%= commentDate %>)</li>
+<%
+                    }
+%>
+                    </ul>
+                    <form action="addComment.jsp" method="post">
+                        <input type="hidden" name="num" value="<%= num %>">
+                        <input type="hidden" name="id" value="kim">
+                        <textarea id="commentText" name="commentText" required></textarea>
+                        <input type="submit" value="댓글 등록">
+                    </form>
 <%
                 } else {
-                    // 해당 번호의 게시글이 없을 경우 처리
                     out.println("해당 번호의 게시글을 찾을 수 없습니다.");
                 }
             } catch (Exception e) {

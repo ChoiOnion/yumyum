@@ -11,7 +11,7 @@
     StringBuilder tableHTML = new StringBuilder();
 
     try {
-        String dbURL = "jdbc:mysql://localhost:3306/nyamnyam";
+        String dbURL = "jdbc:mysql://localhost:3306/nyamnyam?characterEncoding=UTF-8";
         String dbID = "root";
         String dbPassword = "Puppy0423!";
         String driverName = "com.mysql.jdbc.Driver";
