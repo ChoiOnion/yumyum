@@ -28,7 +28,7 @@
 
         String dbURL = "jdbc:mysql://localhost:3306/nyamnyam";
         String dbID = "root";
-        String dbPassword = "Puppy0423!";
+        String dbPassword = "1234";
         String driverName = "com.mysql.jdbc.Driver";
         Class.forName(driverName);
         conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
