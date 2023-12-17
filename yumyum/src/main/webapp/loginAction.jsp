@@ -38,8 +38,10 @@
         
         if(result == 1){
             session.setAttribute("userId", user.getUserId());
+            //session.setAttribute("userId", userId);
             PrintWriter script = response.getWriter();
             script.println("<script>");
+            script.println("alert('로그인이 완료되었습니다.')");
             script.println("location.href='main.jsp'");
             script.println("</script>");
         }

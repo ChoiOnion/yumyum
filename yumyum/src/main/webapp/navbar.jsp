@@ -15,7 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>냠냠북클럽</title>
     <style>
-      @font-face {
+    @font-face {
             font-family: 'Cafe24Ssurround';
             src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
             font-weight: normal;
@@ -26,7 +26,7 @@
         }
         /* 헤더 스타일 */
         header {
-            background-color: #ff916f92; /* 배경색 */
+            background-color:  #f4a460; /* 배경색 */
             padding: 10px 0; /* 위아래 여백 */
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
             display: flex;
@@ -103,10 +103,10 @@
             <li><a href="discussionBoard.html">독서 토론 게시판</a></li>
             <li><a href="meetingBoard.html">독서 모임 게시판</a></li>
             <li class="dropdown_main">
-                <a href="readingRecords.html">독서 기록 페이지</a>
+                <a href="readingRecords.jsp">독서 기록 페이지</a>
                 <div class="dropdown_menu">
-                    <a href="readingList.html">목록</a>
-                    <a href="recordReading.html">기록</a>
+                    <a href="readingRecords.jsp">독서 목록</a>
+                    <a href="readingReview.html">별점 및 서평</a>
                     <a href="readingCalendar.html">캘린더</a>
                     <a href="readingStats.html">통계</a>
                 </div>

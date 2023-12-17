@@ -43,7 +43,7 @@ select {
     border-radius: 5px; 
     padding: 10px; 
     font-size: 16px; 
-    width: 15%; /* 드롭다운의 너비 조정 */
+    width: 20%; /* 드롭다운의 너비 조정 */
     box-sizing: border-box; 
     margin-right: 1px; /* 드롭다운과 검색란 사이 간격 추가 */
 }
