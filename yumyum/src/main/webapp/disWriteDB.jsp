@@ -26,22 +26,21 @@
         int nextValue = autoIncrement.getAndIncrement();
         application.setAttribute("autoIncrement", autoIncrement);
 
-        String dbURL = "jdbc:mysql://localhost:3306/final";
+        String dbURL = "jdbc:mysql://localhost:3306/nyamnyam";
         String dbID = "root";
         String dbPassword = "Puppy0423!";
         String driverName = "com.mysql.jdbc.Driver";
         Class.forName(driverName);
         conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
 
-        String sql = "INSERT INTO discussion (num, title, id, date, text, isDelete, board) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO discussion (num, title, id, date, text, isDelete) VALUES (?, ?, ?, ?, ?, ?)";
         pstmt = conn.prepareStatement(sql);
         pstmt.setInt(1, nextValue);
         pstmt.setString(2, title);
-        pstmt.setString(3, "작성자"); 
+        pstmt.setString(3, "han"); 
         pstmt.setString(4, new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
         pstmt.setString(5, text);
         pstmt.setInt(6, 0);
-        pstmt.setInt(7, 0);
         pstmt.executeUpdate();
     } catch (Exception e) {
         e.printStackTrace();

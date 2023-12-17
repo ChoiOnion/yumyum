@@ -24,7 +24,7 @@
             ResultSet rs = null;
 
             try {
-                String dbURL = "jdbc:mysql://localhost:3306/final";
+                String dbURL = "jdbc:mysql://localhost:3306/nyamnyam";
                 String dbID = "root";
                 String dbPassword = "Puppy0423!";
                 String driverName = "com.mysql.jdbc.Driver";

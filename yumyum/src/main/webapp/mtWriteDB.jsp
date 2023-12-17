@@ -3,13 +3,14 @@
 <%@ page import="java.sql.*"%>
 <%@ page import="java.text.SimpleDateFormat"%>
 <%@ page import="java.util.Date"%>
+<%@ page import="java.util.concurrent.atomic.AtomicInteger" %>
 
 <%
     String title = request.getParameter("title");
     String text = request.getParameter("text");
     String place = request.getParameter("place");
     String meetingDate = request.getParameter("meetingDate");
-    int participant = Integer.parseInt(request.getParameter("participant"));
+    int headcount = Integer.parseInt(request.getParameter("headcount"));
 
     Connection conn = null;
     PreparedStatement pstmt = null;
@@ -28,24 +29,24 @@
         int nextValue = autoIncrement.getAndIncrement();
         application.setAttribute("autoIncrement", autoIncrement);
         
-        String dbURL = "jdbc:mysql://localhost:3306/final";
+        String dbURL = "jdbc:mysql://localhost:3306/nyamnyam";
         String dbID = "root";
         String dbPassword = "Puppy0423!";
         String driverName = "com.mysql.jdbc.Driver";
         Class.forName(driverName);
         conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
 
-        String sql = "INSERT INTO meeting (num, title, id, date, text, place, meetingDate, participant, isDelete) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO meeting (num, title, id, date, text, place, meetingDate, participant, headcount) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         pstmt = conn.prepareStatement(sql);
         pstmt.setInt(1, nextValue);
         pstmt.setString(2, title);
-        pstmt.setString(3, "작성자"); 
+        pstmt.setString(3, "kim"); 
         pstmt.setString(4, new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
         pstmt.setString(5, text);
         pstmt.setString(6 , place);
         pstmt.setString(7, meetingDate);
-        pstmt.setInt(8, participant);
-        pstmt.setInt(9, 0);
+        pstmt.setInt(8, 0);
+        pstmt.setInt(9, headcount);
         pstmt.executeUpdate();
     } catch (Exception e) {
         e.printStackTrace();

@@ -24,7 +24,7 @@
             ResultSet rs = null;
 
             try {
-                String dbURL = "jdbc:mysql://localhost:3306/final";
+                String dbURL = "jdbc:mysql://localhost:3306/nyamnyam";
                 String dbID = "root";
                 String dbPassword = "Puppy0423!";
                 String driverName = "com.mysql.jdbc.Driver";
@@ -44,6 +44,7 @@
                     String place = rs.getString("place");
                     String meetingDate = rs.getString("meetingDate");
                     int participant = rs.getInt("participant");
+                    int headcount = rs.getInt("headcount");
                     String date = new SimpleDateFormat("yyyy-MM-dd").format(rs.getTimestamp("date"));
 
 %>
@@ -52,11 +53,23 @@
                     <p>작성 날짜: <%= date %></p>
                     <p>모임 장소: <%= place %></p>
                     <p>모임 날짜: <%= meetingDate %></p>
-                    <p>모임 인원: <%= participant %></p>
+                    <p>모임 인원: <%= participant %> / <%= headcount %></p>
                     <p>내용: <%= text %></p>
-                    <button>참여</button><br>
+                    <button onclick="participate(<%= numParam %>)">참여</button><br>
                     <button><a href="meetingBoard.html">글 목록</a></button>
-                    
+<script>
+function participate(num) {
+    var xmlhttp = new XMLHttpRequest();
+    var url = "mtParticipate.jsp?num="+num;
+    xmlhttp.open("POST", url, true);
+    xmlhttp.send();
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        	window.alert(xmlhttp.responseText);
+        }
+    };
+}
+</script>
 <%
                 } else {
                     // 해당 번호의 게시글이 없을 경우 처리
