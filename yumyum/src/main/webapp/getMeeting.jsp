@@ -39,6 +39,7 @@
             String place = rs.getString("place");
             String meetingDate = rs.getString("meetingDate");
             int participant = rs.getInt("participant");
+            int headcount = rs.getInt("headcount");
             String date = new SimpleDateFormat("yyyy-MM-dd").format(rs.getTimestamp("date"));
 
             tableHTML.append("<tr>");
@@ -47,7 +48,7 @@
             tableHTML.append("<td>").append(id).append("</td>");
             tableHTML.append("<td>").append(place).append("</td>");
             tableHTML.append("<td>").append(meetingDate).append("</td>");
-            tableHTML.append("<td>").append(participant).append("</td>");
+            tableHTML.append("<td>").append(participant+"/"+headcount).append("</td>");
             tableHTML.append("<td>").append(date).append("</td>");
             tableHTML.append("</tr>");
         }

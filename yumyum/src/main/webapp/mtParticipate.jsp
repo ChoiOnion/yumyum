@@ -4,41 +4,63 @@
 <%
     String numParam = request.getParameter("num");
 
-    if (numParam != null) {
+if (numParam != null) {
+    try {
+        int num = Integer.parseInt(numParam);
+
+        Connection conn = null;
+        PreparedStatement pstmtParticipantCheck = null;
+        PreparedStatement pstmtMeeting = null;
+        PreparedStatement pstmtParticipantInsert = null;
+
         try {
-            int num = Integer.parseInt(numParam);
+            String dbURL = "jdbc:mysql://localhost:3306/nyamnyam";
+            String dbID = "root";
+            String dbPassword = "Puppy0423!";
+            String driverName = "com.mysql.jdbc.Driver";
+            Class.forName(driverName);
+            conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
 
-            Connection conn = null;
-            PreparedStatement pstmt = null;
+            //id 유니크 체크
+            String checkParticipantQuery = "SELECT id FROM participant WHERE num = ? AND id = ?";
+            pstmtParticipantCheck = conn.prepareStatement(checkParticipantQuery);
+            pstmtParticipantCheck.setInt(1, num);
+            pstmtParticipantCheck.setString(2, "kim");
+            ResultSet rs = pstmtParticipantCheck.executeQuery();
 
-            try {
-                String dbURL = "jdbc:mysql://localhost:3306/nyamnyam";
-                String dbID = "root";
-                String dbPassword = "Puppy0423!";
-                String driverName = "com.mysql.jdbc.Driver";
-                Class.forName(driverName);
-                conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
+            if (rs.next()) {
+                out.println("이미 참여한 모임입니다.");
+            } else {
+                //참여자 수 업데이트
+                String updateMeetingQuery = "UPDATE meeting SET participant = participant + 1 WHERE participant < headcount AND num = ?";
+                pstmtMeeting = conn.prepareStatement(updateMeetingQuery);
+                pstmtMeeting.setInt(1, num);
+                int rowCountMeeting = pstmtMeeting.executeUpdate();
 
-                String updateQuery = "UPDATE meeting SET participant = participant + 1 WHERE participant < headcount AND num = ?";
-                pstmt = conn.prepareStatement(updateQuery);
-                pstmt.setInt(1, num);
-                int rowCount = pstmt.executeUpdate();
-
-                if (rowCount > 0) {
+                if (rowCountMeeting > 0) {
+                    //참여 테이블에 참여 정보 추가
+                    String insertParticipantQuery = "INSERT INTO participant (num, id) VALUES (?, ?)";
+                    pstmtParticipantInsert = conn.prepareStatement(insertParticipantQuery);
+                    pstmtParticipantInsert.setInt(1, num);
+                    pstmtParticipantInsert.setString(2, "kim"); // 여기에 실제 사용자의 ID를 넣어주세요
+                    pstmtParticipantInsert.executeUpdate();
                     out.println("참여가 완료되었습니다.");
                 } else {
                     out.println("인원이 꽉 차서 참여할 수 없습니다.");
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                if (pstmt != null) pstmt.close();
-                if (conn != null) conn.close();
             }
-        } catch (NumberFormatException e) {
-            out.println("올바르지 않은 게시글 번호입니다.");
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (pstmtParticipantCheck != null) pstmtParticipantCheck.close();
+            if (pstmtMeeting != null) pstmtMeeting.close();
+            if (pstmtParticipantInsert != null) pstmtParticipantInsert.close();
+            if (conn != null) conn.close();
         }
-    } else {
-        out.println("게시글 번호를 지정해주세요.");
+    } catch (NumberFormatException e) {
+        out.println("올바르지 않은 게시글 번호입니다.");
     }
+} else {
+    out.println("게시글 번호를 지정해주세요.");
+}
 %>
