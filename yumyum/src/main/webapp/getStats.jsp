@@ -5,9 +5,6 @@
 <%@ page import="java.net.URLDecoder" %>
 <%
 String id = request.getParameter("id");
-if (id != null) {
-    id = URLDecoder.decode(id, "UTF-8");
-}
 
     Connection conn = null;
     ResultSet rs = null;
@@ -61,7 +58,6 @@ if (id != null) {
         if (rs3.next()) {
             threeBookCount = rs3.getInt("threeBookCount");
         }
-
         response.getWriter().println(oneBookCount);
         response.getWriter().println(twoBookCount);
         response.getWriter().println(threeBookCount);

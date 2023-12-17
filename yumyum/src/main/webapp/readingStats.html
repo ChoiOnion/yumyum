@@ -6,13 +6,30 @@
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
   </head>
   <body>
-    <button><a href="main.jsp">메인</a></button><br>
+    <!-- 메인 버튼 추가 -->
+    <button id="mainButton">메인</button><br>
+    
     <!-- 너비(width), 높이(height) 설정 -->
     <div id="main" style="width: 600px;height:400px;"></div>
     <!-- 초기화 및 차트 옵션 설정 -->
     <script>
-    var bookCount;
+        var bookCount;
+
+        // URL 파라미터 값을 가져오는 함수
+        function getParameterByName(name, url) {
+          if (!url) url = window.location.href;
+          name = name.replace(/[\[\]]/g, "\\$&");
+          var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+              results = regex.exec(url);
+          if (!results) return null;
+          if (!results[2]) return '';
+          return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
         function loadStats() {
+            // id 파라미터 값을 가져오기
+            var idParam = getParameterByName('id');
+
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function() {
                  if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -55,14 +72,24 @@
                     myChart.setOption(option)
                 }
             };
-            xmlhttp.open("GET", "getStats.jsp", true);
+            
+            // 수정된 부분: URL 파라미터 값을 넣어서 요청
+            xmlhttp.open("GET", "getStats.jsp?id=" + idParam, true);
             xmlhttp.send();
         }
 
-
-        // 페이지 로딩 시 게시판 목록을 가져옴
+        // 페이지 로딩 시 함수 실행
         window.onload = function() {
             loadStats();
+            
+            // 수정된 부분: 버튼 클릭 시 메인 페이지로 이동하도록 처리
+            var mainButton = document.getElementById('mainButton');
+            if (mainButton) {
+                mainButton.addEventListener('click', function() {
+                    var idParam = getParameterByName('id');
+                    window.location.href = 'main.jsp?id=' + idParam;
+                });
+            }
         };
     </script>
   </body>
