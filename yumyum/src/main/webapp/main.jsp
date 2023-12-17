@@ -14,7 +14,7 @@
     <form method="get">
         <select name="searchType">
             <option value="title">제목</option>
-            <option value="writer">글쓴이</option>
+            <option value="writter">글쓴이</option>
             <option value="genre">장르</option>
         </select>
         <input type="text" name="searchQuery">
@@ -26,9 +26,9 @@
     <%
         String searchType = request.getParameter("searchType");
         String searchQuery = request.getParameter("searchQuery");
-        String dbURL = "jdbc:mysql://localhost:3306/loaddb";
+        String dbURL = "jdbc:mysql://localhost:3306/nyamnyam";
         String dbID = "root";
-        String dbPassword = "root";
+        String dbPassword = "1234";
         String driverName = "com.mysql.jdbc.Driver";
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -46,8 +46,8 @@
                     case "title":
                         safeSearchType = "title";
                         break;
-                    case "writer":
-                        safeSearchType = "writer";
+                    case "writter":
+                        safeSearchType = "writter";
                         break;
                     case "genre":
                         safeSearchType = "genre";
@@ -65,7 +65,7 @@
                     hasResults = true;
                     out.println("<p>책 ID: " + rs.getInt("bookId") + "</p>");
                     out.println("<p>제목: " + rs.getString("title") + "</p>");
-                    out.println("<p>글쓴이: " + rs.getString("writer") + "</p>");
+                    out.println("<p>글쓴이: " + rs.getString("writter") + "</p>");
                     out.println("<p>장르: " + rs.getString("genre") + "</p>");
                     out.println("<p>별점: " + rs.getDouble("starScore") + "</p>");
                     out.println("<p>서평: " + rs.getString("review") + "</p>");
@@ -103,7 +103,7 @@
             out.println("<h2>인기 순위</h2>");
             int rank = 1;
             while(rankRs.next()) {
-                out.println("<p>" + rank + "위: " + rankRs.getString("title") + " - " + rankRs.getString("writer") + ", 별점: " + rankRs.getDouble("starScore") + "</p>");
+                out.println("<p>" + rank + "위: " + rankRs.getString("title") + " - " + rankRs.getString("writter") + ", 별점: " + rankRs.getDouble("starScore") + "</p>");
                 rank++;
             }
         } catch(Exception e) {

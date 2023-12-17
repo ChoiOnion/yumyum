@@ -8,12 +8,12 @@
 <% request.setCharacterEncoding("UTF-8");%>
 
 <jsp:useBean id="user" class="user.User" scope="page"></jsp:useBean>
-<jsp:setProperty property="userId" name="user"/>
-<jsp:setProperty property="userPassword" name="user"/>
-<jsp:setProperty property="userName" name="user"/>
-<jsp:setProperty property="userEmail" name="user"/>
-<jsp:setProperty property="userSex" name="user"/>
-<jsp:setProperty property="userPhone" name="user"/>
+<jsp:setProperty property="id" name="user"/>
+<jsp:setProperty property="pwd" name="user"/>
+<jsp:setProperty property="name" name="user"/>
+<jsp:setProperty property="mail" name="user"/>
+<jsp:setProperty property="phoneNum" name="user"/>
+<jsp:setProperty property="gender" name="user"/>
 
 <!DOCTYPE html>
 <html>
@@ -25,7 +25,7 @@
 </head>
 <body>
     <% 
-        if(user.getUserId() == null || user.getUserPassword() == null || user.getUserName() == null || user.getUserEmail() == null || user.getUserSex() == null || user.getUserPhone() == null){
+        if(user.getId() == null || user.getPwd() == null || user.getName() == null || user.getMail() == null || user.getGender() == null || user.getPhoneNum() == null){
             PrintWriter script = response.getWriter();
             script.println("<script>");
             script.println("alert('입력이 안 된 사항이 있습니다.')");
@@ -47,11 +47,12 @@
                 script.println("history.back()");
                 script.println("</script>");
             } else {
-                session.setAttribute("userId", user.getUserId());
+                session.setAttribute("id", user.getId());
+                String id = user.getId();
                 PrintWriter script = response.getWriter();
                 script.println("<script>");
                 script.println("alert('회원가입이 완료되었습니다.')");
-                script.println("location.href='main.jsp'");
+                script.println("location.href='main.jsp?id="+id+"'");
                 script.println("</script>");
             }
         }

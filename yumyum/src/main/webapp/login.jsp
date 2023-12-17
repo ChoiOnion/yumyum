@@ -24,8 +24,8 @@
             <!-- Existing login form (previous code) -->
             <div class="login-box">
                 <form method="post" action="loginAction.jsp">
-                    <input type="text" class="email ele" name="userId" placeholder="아이디">
-                    <input type="password" class="password ele" name="userPassword" placeholder="비밀번호">
+                    <input type="text" class="email ele" name="id" placeholder="아이디">
+                    <input type="password" class="password ele" name="pwd" placeholder="비밀번호">
                     <button class="clkbtn" type="submit">Login</button>
                 </form>
             </div>
@@ -33,16 +33,16 @@
             <!-- 회원가입 폼 -->
             <div class="signup-box">
                 <form method="post" action="joinAction.jsp">
-                    <input type="text" class="name ele" name="userId" placeholder="아이디">
-                    <input type="password" class="password ele" name="userPassword" placeholder="비밀번호">
-                    <input type="text" class="name ele" name="userName" placeholder="이름">
-                    <input type="email" class="email ele" name="userEmail" placeholder="이메일">
-                    <input type="text" class="name ele" name="userPhone" placeholder="전화번호">
+                    <input type="text" class="name ele" name="id" placeholder="아이디">
+                    <input type="password" class="password ele" name="pwd" placeholder="비밀번호">
+                    <input type="text" class="name ele" name="name" placeholder="이름">
+                    <input type="email" class="email ele" name="mail" placeholder="이메일">
+                    <input type="text" class="name ele" name="phoneNum" placeholder="전화번호">
                     <div class="form-group mb-3">
                         <div class="btn-group" data-toggle="buttons">
-                            <input type="radio" class="btn-check" name="userSex" id="남자" value="남자" autocomplete="off" checked>
+                            <input type="radio" class="btn-check" name="gender" id="남자" value="남자" autocomplete="off" checked>
                             <label class="btn btn-secondary" for="남자">남자</label>
-                            <input type="radio" class="btn-check" name="userSex" id="여자" value="여자" autocomplete="off">
+                            <input type="radio" class="btn-check" name="gender" id="여자" value="여자" autocomplete="off">
                             <label class="btn btn-secondary" for="여자">여자</label>
                         </div>
                     </div>

@@ -7,8 +7,8 @@
 <% request.setCharacterEncoding("UTF-8");%>
 
 <jsp:useBean id="user" class="user.User" scope="page"></jsp:useBean>
-<jsp:setProperty property="userId" name="user"/>
-<jsp:setProperty property="userPassword" name="user"/>
+<jsp:setProperty property="id" name="user"/>
+<jsp:setProperty property="pwd" name="user"/>
 
 <!DOCTYPE html>
 <html>
@@ -20,12 +20,12 @@
 </head>
 <body>
     <% 
-        String userId = null;
-        if(session.getAttribute("userId") != null){
-            userId = (String) session.getAttribute("userId");
+        String id = null;
+        if(session.getAttribute("id") != null){
+            id = (String) session.getAttribute("id");
         }
         
-        if(userId != null){
+        if(id != null){
             PrintWriter script = response.getWriter();
             script.println("<script>");
             script.println("alert('이미 로그인이 되어있습니다')");
@@ -34,15 +34,15 @@
         }
     
         UserDAO userDAO = new UserDAO();
-        int result = userDAO.login(user.getUserId(), user.getUserPassword());
+        int result = userDAO.login(user.getId(), user.getPwd());
         
         if(result == 1){
-            session.setAttribute("userId", user.getUserId());
-            //session.setAttribute("userId", userId);
+            session.setAttribute("id", user.getId());
+            id = user.getId();
             PrintWriter script = response.getWriter();
             script.println("<script>");
             script.println("alert('로그인이 완료되었습니다.')");
-            script.println("location.href='main.jsp'");
+            script.println("location.href='main.jsp?id="+id+"'");
             script.println("</script>");
         }
         else if(result == 0){

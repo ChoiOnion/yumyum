@@ -2,16 +2,20 @@
 <%@ page import="java.sql.*"%>
 <%@ page import="java.util.*"%>
 <%@ page import="java.text.SimpleDateFormat"%>
+<%@ page import="java.net.URLDecoder" %>
 <%
+String id = request.getParameter("id");
+if (id != null) {
+    id = URLDecoder.decode(id, "UTF-8");
+}
+
     Connection conn = null;
-    Statement stmt = null;
     ResultSet rs = null;
-    
-    Statement stmt2 = null;
     ResultSet rs2 = null;
-    
-    Statement stmt3 = null;
     ResultSet rs3 = null;
+    PreparedStatement pstmt = null;
+    PreparedStatement pstmt2 = null;
+    PreparedStatement pstmt3 = null;
 
     try {
         String dbURL = "jdbc:mysql://localhost:3306/nyamnyam";
@@ -22,17 +26,21 @@
         conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
 
         // SQL 쿼리 실행
-        String sql = "SELECT COUNT(bookID) AS oneBookCount FROM record WHERE MONTH(endDate) = MONTH(CURRENT_DATE)";
-        stmt = conn.createStatement();
-        rs = stmt.executeQuery(sql);
+        String sql = "SELECT COUNT(bookID) AS oneBookCount FROM record WHERE MONTH(endDate) = MONTH(CURRENT_DATE) AND id = ?";
+        pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1, id);
+        rs = pstmt.executeQuery();
 
-        String sql2 = "SELECT COUNT(bookID) AS twoBookCount FROM record WHERE MONTH(endDate) = (MONTH(CURRENT_DATE)-1)";
-        stmt2 = conn.createStatement();
-        rs2 = stmt2.executeQuery(sql2);
+        String sql2 = "SELECT COUNT(bookID) AS twoBookCount FROM record WHERE MONTH(endDate) = (MONTH(CURRENT_DATE)-1) AND id = ?";
+        pstmt2 = conn.prepareStatement(sql2);
+        pstmt2.setString(1, id);
+        rs2 = pstmt2.executeQuery();
 
-        String sql3 = "SELECT COUNT(bookID) AS threeBookCount FROM record WHERE MONTH(endDate) = (MONTH(CURRENT_DATE)-2)";
-        stmt3 = conn.createStatement();
-        rs3 = stmt3.executeQuery(sql3);
+        String sql3 = "SELECT COUNT(bookID) AS threeBookCount FROM record WHERE MONTH(endDate) = (MONTH(CURRENT_DATE)-2) AND id = ?";
+        pstmt3 = conn.prepareStatement(sql3);
+        pstmt3.setString(1, id);
+        rs3 = pstmt3.executeQuery();
+
 
         // 결과를 저장할 변수
         int oneBookCount = 0;
@@ -64,9 +72,9 @@
         if (rs != null) rs.close();
         if (rs2 != null) rs2.close();
         if (rs3 != null) rs3.close();
-        if (stmt != null) stmt.close();
-        if (stmt2 != null) stmt2.close();
-        if (stmt3 != null) stmt3.close();
+        if (pstmt != null) pstmt.close();
+        if (pstmt2 != null) pstmt2.close();
+        if (pstmt3 != null) pstmt3.close();
         if (conn != null) conn.close();
     }
 %>

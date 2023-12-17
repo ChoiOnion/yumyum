@@ -2,9 +2,9 @@
     pageEncoding="UTF-8"%>
 
 <%
-    String userId = null;
-    if (session.getAttribute("userId") != null) {
-        userId = (String) session.getAttribute("userId");
+    String id = null;
+    if (session.getAttribute("id") != null) {
+        id = (String) session.getAttribute("id");
     }
 %>
 
@@ -99,22 +99,22 @@
     <h1 class="h1">냠냠북클럽</h1>
     <div class="menu">
         <ul class="lists">
-            <li><a href="main.jsp">도서 검색</a></li>
-            <li><a href="discussionBoard.html">독서 토론 게시판</a></li>
-            <li><a href="meetingBoard.html">독서 모임 게시판</a></li>
+            <li><a href="main.jsp?id=<%=id%>">도서 검색</a></li>
+            <li><a href="discussionBoard.html?id=<%=id%>">독서 토론 게시판</a></li>
+            <li><a href="meetingBoard.html?id=<%=id%>">독서 모임 게시판</a></li>
             <li class="dropdown_main">
-                <a href="readingRecords.jsp">독서 기록 페이지</a>
+                <a href="readingRecords.jsp?id=<%=id%>">독서 기록 페이지</a>
                 <div class="dropdown_menu">
-                    <a href="readingRecords.jsp">독서 목록</a>
-                    <a href="readingReview.html">별점 및 서평</a>
-                    <a href="readingCalendar.html">캘린더</a>
-                    <a href="readingStats.html">통계</a>
+                    <a href="readingRecords.jsp?id=<%=id%>">독서 목록</a>
+                    <a href="readingReview.html?id=<%=id%>">별점 및 서평</a>
+                    <a href="readingCalendar.html?id=<%=id%>">캘린더</a>
+                    <a href="readingStats.html?id=<%=id%>">통계</a>
                 </div>
             </li>
         </ul>
     </div>
     <div class="log">
-        <% if (userId != null) { %>
+        <% if (id != null) { %>
         <a href="logoutAction.jsp">Log Out</a>
         <% } %>
     </div>
