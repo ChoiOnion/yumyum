@@ -2,7 +2,7 @@
 <%@ page import="java.sql.*"%>
 <%@ page import="java.util.*"%>
 <%@ page import="java.text.SimpleDateFormat"%>
-
+<%request.setCharacterEncoding("UTF-8");%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +14,7 @@
 <%
     // 게시글 번호를 파라미터로부터 가져옴
     String numParam = request.getParameter("num");
-    
+	String idParam = request.getParameter("id");
     if (numParam != null) {
         try {
             int num = Integer.parseInt(numParam);
@@ -53,7 +53,7 @@
                     <p>작성자: <%= id %></p>
                     <p>작성 날짜: <%= date %></p>
                     <p>내용: <%= text %></p>
-                    <button><a href="discussionBoard.html">글 목록</a></button>
+    				<button id="boardButton">게시글 목록</button><br>
                     <hr>
                      <ul>
 <%
@@ -69,7 +69,7 @@
                     </ul>
                     <form action="addComment.jsp" method="post">
                         <input type="hidden" name="num" value="<%= num %>">
-                        <input type="hidden" name="id" value="kim">
+                        <input type="hidden" name="id" value="<%= idParam %>">
                         <textarea id="commentText" name="commentText" required></textarea>
                         <input type="submit" value="댓글 등록">
                     </form>
@@ -91,6 +91,27 @@
         out.println("게시글 번호를 지정해주세요.");
     }
 %>
+<script>
+// URL 파라미터 값을 가져오는 함수
+function getParameterByName(name, url) {
+  if (!url) url = window.location.href;
+  name = name.replace(/[\[\]]/g, "\\$&");
+  var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+      results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return '';
+  return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
 
+window.onload = function() {
+    var boardButton = document.getElementById('boardButton');
+    if (boardButton) {
+    	boardButton.addEventListener('click', function() {
+            var idParam = getParameterByName('id');
+            window.location.href = 'discussionBoard.html?id=' + idParam;
+        });
+    }
+};
+</script>
 </body>
 </html>

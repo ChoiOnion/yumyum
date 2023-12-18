@@ -2,7 +2,7 @@
 <%@ page import="java.sql.*"%>
 <%@ page import="java.util.*"%>
 <%@ page import="java.text.SimpleDateFormat"%>
-
+<%request.setCharacterEncoding("UTF-8");%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,11 +10,27 @@
     <title>게시글 보기</title>
 </head>
 <body>
+<%
 
+String numParam = request.getParameter("num");
+String idParam = request.getParameter("id");
+%>
+<script>
+function participate() {
+    var xmlhttp = new XMLHttpRequest();
+    var url = "mtParticipate.jsp?num=<%=numParam%>&id=<%=idParam%>";
+    xmlhttp.open("POST", url, true);
+    xmlhttp.send();
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        	window.alert(xmlhttp.responseText);
+        	location.reload();
+        }
+    };
+}
+</script>
 <%
     // 게시글 번호를 파라미터로부터 가져옴
-    String numParam = request.getParameter("num");
-    
     if (numParam != null) {
         try {
             int num = Integer.parseInt(numParam);
@@ -55,22 +71,9 @@
                     <p>모임 날짜: <%= meetingDate %></p>
                     <p>모임 인원: <%= participant %> / <%= headcount %></p>
                     <p>내용: <%= text %></p>
-                    <button onclick="participate(<%= numParam %>)">참여</button><br>
-                    <button><a href="meetingBoard.html">글 목록</a></button>
-<script>
-function participate(num) {
-    var xmlhttp = new XMLHttpRequest();
-    var url = "mtParticipate.jsp?num="+num;
-    xmlhttp.open("POST", url, true);
-    xmlhttp.send();
-    xmlhttp.onreadystatechange = function() {
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-        	window.alert(xmlhttp.responseText);
-        	location.reload();
-        }
-    };
-}
-</script>
+                    <button onclick="participate()">참여</button><br>
+    				<button id="boardButton">게시글 목록</button><br>
+    				<table id="postTable"></table>
 <%
                 } else {
                     // 해당 번호의 게시글이 없을 경우 처리
@@ -90,6 +93,41 @@ function participate(num) {
         out.println("게시글 번호를 지정해주세요.");
     }
 %>
+<script>
 
+function getParameterByName(name, url) {
+	  if (!url) url = window.location.href;
+	  name = name.replace(/[\[\]]/g, "\\$&");
+	  var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+	      results = regex.exec(url);
+	  if (!results) return null;
+	  if (!results[2]) return '';
+	  return decodeURIComponent(results[2].replace(/\+/g, " "));
+	}
+
+	window.onload = function() {
+	    var boardButton = document.getElementById('boardButton');
+	    if (boardButton) {
+	    	boardButton.addEventListener('click', function() {
+	            var idParam = getParameterByName('id');
+	            window.location.href = 'meetingBoard.html?id=' + idParam;
+	        });
+	    }
+		loadParticipation();
+	};
+	
+    function loadParticipation() {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("postTable").innerHTML = xmlhttp.responseText;
+            }
+        };
+        var idParam = getParameterByName('id');
+        var numParam = getParameterByName('num');
+        xmlhttp.open("GET", "getParticipation.jsp?id="+idParam+"&num="+numParam, true);
+        xmlhttp.send();
+    }
+</script>
 </body>
 </html>

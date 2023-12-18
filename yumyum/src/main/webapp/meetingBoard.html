@@ -5,8 +5,10 @@
 <title>독서 모임 게시판</title>
 </head>
 <body>
-<button><a href="main.jsp">메인</a></button><br>
-<button><a href="meetingWrite.jsp">글 작성</a></button>
+    <!-- 메인 버튼 추가 -->
+    <button id="mainButton">메인</button><br>
+    <!-- 글 작성 버튼 추가 -->
+    <button id="writeButton">글 작성</button><br>
     <table border="1" id="postTable">
         <tr>
             <th>글 번호</th>
@@ -18,7 +20,7 @@
             <th>작성 날짜</th>
         </tr>
     </table>
- <script>
+    <script>
         function loadPosts() {
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function() {
@@ -26,14 +28,44 @@
                     document.getElementById("postTable").innerHTML = xmlhttp.responseText;
                 }
             };
-            xmlhttp.open("GET", "getMeeting.jsp", true);
+            var idParam = getParameterByName('id');
+            xmlhttp.open("GET", "getMeeting.jsp?id="+idParam, true);
             xmlhttp.send();
         }
 
         // 페이지 로딩 시 게시판 목록을 가져옴
         window.onload = function() {
             loadPosts();
+            
+            // 메인 버튼 이벤트 리스너 추가
+            var mainButton = document.getElementById('mainButton');
+            if (mainButton) {
+                mainButton.addEventListener('click', function() {
+                    var idParam = getParameterByName('id');
+                    window.location.href = 'main.jsp?id=' + idParam;
+                });
+            }
+
+            // 글 작성 버튼 이벤트 리스너 추가
+            var writeButton = document.getElementById('writeButton');
+            if (writeButton) {
+                writeButton.addEventListener('click', function() {
+                    var idParam = getParameterByName('id');
+                    window.location.href = 'meetingWrite.jsp?id=' + idParam;
+                });
+            }
         };
+
+        // URL 파라미터 값을 가져오는 함수
+        function getParameterByName(name, url) {
+          if (!url) url = window.location.href;
+          name = name.replace(/[\[\]]/g, "\\$&");
+          var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+              results = regex.exec(url);
+          if (!results) return null;
+          if (!results[2]) return '';
+          return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
     </script>
 </body>
 </html>

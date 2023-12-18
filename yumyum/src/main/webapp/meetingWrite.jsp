@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%request.setCharacterEncoding("UTF-8");%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +8,8 @@
 <title>모임 글 작성</title>
 </head>
 <body>
-	<form action="mtWriteDB.jsp" method="post">
+<%String id = request.getParameter("id");%>
+	<form action="mtWriteDB.jsp?id=<%= id %>" method="post">
         제목: <input type="text" name="title" required><br>
         모임 인원: <input type="number" name="headcount" min=2 required><br>
         모임 날짜: <input type="date" id="meetingDate" name="meetingDate" required><br>

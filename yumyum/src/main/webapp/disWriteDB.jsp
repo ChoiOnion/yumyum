@@ -4,11 +4,11 @@
 <%@ page import="java.text.SimpleDateFormat"%>
 <%@ page import="java.util.Date"%>
 <%@ page import="java.util.concurrent.atomic.AtomicInteger" %>
-
+<%request.setCharacterEncoding("UTF-8");%>
 <%
     String title = request.getParameter("title");
     String text = request.getParameter("text");
-
+    String id = request.getParameter("id");
     Connection conn = null;
     PreparedStatement pstmt = null;
 
@@ -37,7 +37,7 @@
         pstmt = conn.prepareStatement(sql);
         pstmt.setInt(1, nextValue);
         pstmt.setString(2, title);
-        pstmt.setString(3, "han"); 
+        pstmt.setString(3, id); 
         pstmt.setString(4, new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
         pstmt.setString(5, text);
         pstmt.setInt(6, 0);
@@ -52,5 +52,5 @@
 
 <script>
     alert("글이 작성되었습니다.");
-    location.href="discussionBoard.html";
+    location.href="discussionBoard.html?id=<%=id%>";
 </script>

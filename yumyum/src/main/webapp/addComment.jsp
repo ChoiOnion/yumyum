@@ -3,7 +3,7 @@
 <%@ page import="java.util.*"%>
 <%@ page import="java.util.Date"%>
 <%@ page import="java.text.SimpleDateFormat"%>
-
+<%request.setCharacterEncoding("UTF-8");%>
 <%
     String numParam = request.getParameter("num"); 
     String idParam = request.getParameter("id");   
@@ -40,5 +40,5 @@
         } catch (NumberFormatException e) {
         }
     }
-    response.sendRedirect("discussionView.jsp?num=" + numParam);
+    response.sendRedirect("discussionView.jsp?num=" + numParam+"&id="+idParam);
 %>

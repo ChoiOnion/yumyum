@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*"%>
-
+<%request.setCharacterEncoding("UTF-8");%>
 <%
     String numParam = request.getParameter("num");
+	String idParam = request.getParameter("id");
 
 if (numParam != null) {
     try {
@@ -25,7 +26,7 @@ if (numParam != null) {
             String checkParticipantQuery = "SELECT id FROM participant WHERE num = ? AND id = ?";
             pstmtParticipantCheck = conn.prepareStatement(checkParticipantQuery);
             pstmtParticipantCheck.setInt(1, num);
-            pstmtParticipantCheck.setString(2, "kim");
+            pstmtParticipantCheck.setString(2, idParam);
             ResultSet rs = pstmtParticipantCheck.executeQuery();
 
             if (rs.next()) {
@@ -42,7 +43,7 @@ if (numParam != null) {
                     String insertParticipantQuery = "INSERT INTO participant (num, id) VALUES (?, ?)";
                     pstmtParticipantInsert = conn.prepareStatement(insertParticipantQuery);
                     pstmtParticipantInsert.setInt(1, num);
-                    pstmtParticipantInsert.setString(2, "kim"); // 여기에 실제 사용자의 ID를 넣어주세요
+                    pstmtParticipantInsert.setString(2, idParam); 
                     pstmtParticipantInsert.executeUpdate();
                     out.println("참여가 완료되었습니다.");
                 } else {
