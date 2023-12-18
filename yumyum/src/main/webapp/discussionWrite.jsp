@@ -6,10 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>토론 글 작성</title>
-
     <link rel="stylesheet" href="main.css">
         <style>
-        /* 추가된 CSS 시작 */
         body {
             background-color: #fdf6e3; 
             font-family: 'Cafe24Ssurround';
@@ -72,12 +70,10 @@
             border-radius: 5px; 
             padding: 10px; 
             font-size: 16px; 
-            width: 80%; /* 텍스트 영역의 너비 조정 */
+            width: 80%;
             box-sizing: border-box; 
-            margin-bottom: 10px; /* 텍스트 영역과 검색 버튼 사이 간격 추가 */
+            margin-bottom: 10px; 
         }
-
-        /* 추가된 CSS 끝 */
     </style>
 </head>
 <body>
