@@ -25,7 +25,7 @@
         String idParam = request.getParameter("id");
 
         // SQL 쿼리
-        String sql = "SELECT id, bookId, startDate, endDate FROM record WHERE id = ?";
+        String sql = "SELECT record.id, book.title, record.startDate, record.endDate FROM record, book WHERE id = ? AND book.bookId = record.bookId";
         pstmt = con.prepareStatement(sql);
         pstmt.setString(1, idParam);
 
@@ -36,7 +36,7 @@
 
         while (rs.next()) {
         	String id = rs.getString("id");
-            String bookId = rs.getString("bookId");
+            String bookId = rs.getString("title");
             Timestamp startDateTimestamp = rs.getTimestamp("startDate");
             Timestamp endDateTimestamp = rs.getTimestamp("endDate");
 

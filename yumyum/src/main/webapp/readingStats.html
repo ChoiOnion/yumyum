@@ -3,14 +3,17 @@
   <head>
     <meta charset="utf-8" />
     <title>통계</title>
+    <link rel="stylesheet" href="main.css">
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
   </head>
   <body>
     <!-- 메인 버튼 추가 -->
-    <button id="mainButton">메인</button><br>
+    <button id="mainButton" style=align:left;>메인</button><br>
+    
+    <h2>지난 세 달의 읽은 권 수를 알려드려요</h2><br>
     
     <!-- 너비(width), 높이(height) 설정 -->
-    <div id="main" style="width: 600px;height:400px;"></div>
+    <p id="main" style="width: 900px;height:500px; margin: 0 auto;"></p>
     <!-- 초기화 및 차트 옵션 설정 -->
     <script>
         var bookCount;
@@ -38,18 +41,13 @@
                     var twoBookCount = responseData[1];
                     var threeBookCount = responseData[2];
 
-                    //window.alert(oneBookCount+" "+twoBookCount+" "+threeBookCount);
-
 
                     // 1. 준비한 DOM 컨테이너에서 echarts 초기화하기
                     let myChart = echarts.init(document.getElementById('main'))
 
                     // 2. 차트 옵션 작성하기
                     let option = {
-                      // 차트 제목
-                      title: {
-                        text: '지난 세 달의 읽은 권 수를 알려드려요',
-                      },
+                      
                       // 범례명
                       legend: {
                         data: ['권'],
@@ -61,10 +59,11 @@
                       },
                       yAxis: {},
                       series: [
-                        {
-                          name: '개수',
-                          type: 'bar', // 막대 그래프
-                          data: [threeBookCount, twoBookCount, oneBookCount],
+                        {                       
+                          type: 'bar',
+                          data: [{value: threeBookCount, itemStyle:{color: '#FFCC99'},}, 
+                          		{value: twoBookCount, itemStyle:{color: '#FFA64C'},},
+                          		{value: oneBookCount, itemStyle:{color: '#FF7E00'},}],                               
                         },
                       ],
                     }
@@ -73,7 +72,6 @@
                 }
             };
             
-            // 수정된 부분: URL 파라미터 값을 넣어서 요청
             xmlhttp.open("GET", "getStats.jsp?id=" + idParam, true);
             xmlhttp.send();
         }
@@ -82,7 +80,6 @@
         window.onload = function() {
             loadStats();
             
-            // 수정된 부분: 버튼 클릭 시 메인 페이지로 이동하도록 처리
             var mainButton = document.getElementById('mainButton');
             if (mainButton) {
                 mainButton.addEventListener('click', function() {
