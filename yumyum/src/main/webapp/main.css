@@ -31,7 +31,7 @@ form {
     border-radius: 10px; 
     display: flex; 
     justify-content: space-around; 
-    align-items: center; 
+    
     padding: 20px;
     margin: 20px auto;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
@@ -175,3 +175,18 @@ p {
         flex-direction: column;
     }
 }
+
+#mainbutton{
+    border: 1px solid #deb887; 
+    border-radius: 5px; 
+    padding: 10px; 
+    font-size: 16px; 
+    background-color: #f4a460; 
+    color: white; 
+    cursor: pointer; 
+}
+
+#mainbutton:hover {
+    background-color: #c85a17; 
+}
+
