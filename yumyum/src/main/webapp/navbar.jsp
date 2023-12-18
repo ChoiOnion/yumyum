@@ -16,87 +16,98 @@
     <title>냠냠북클럽</title>
     <style>
     @font-face {
-            font-family: 'Cafe24Ssurround';
-            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
-            font-weight: normal;
-            font-style: normal;
-        }
-        body {
-            font-family: 'Cafe24Ssurround', serif; /* 글꼴 지정 */
-        }
-        /* 헤더 스타일 */
-        header {
-            background-color:  #f4a460; /* 배경색 */
-            padding: 10px 0; /* 위아래 여백 */
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
-            display: flex;
-            flex-direction: column; /* 세로 정렬을 위해 컬럼 방향으로 설정 */
-            align-items: center; /* 가운데 정렬 */
-        }
-
-        .menu {
-            max-width: 1200px; /* 최대 너비 설정 */
-            margin: 20px 0; /* 위아래 여백 */
-        }
-
-        .menu ul {
-            list-style: none; /* 리스트 스타일 제거 */
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center; /* 가운데 정렬 */
-        }
-
-        .lists li {
-            margin-right: 20px; /* 리스트 아이템 간 여백 */
-        }
-
-        .lists li:last-child {
-            margin-right: 0; /* 마지막 아이템의 여백 제거 */
-        }
-
-        .lists a {
-            font-size: 18px; /* 메뉴 폰트 크기 */
-            text-decoration: none; /* 밑줄 제거 */
-            color: #d67d55; /* 글자색 */
-            transition: color 0.3s ease; /* 색상 전환 애니메이션 */
-        }
-
-        .lists a:hover {
-            color: #ff5722; /* 호버 시 색상 변경 */
-        }
-
-        .log {
-            font-size: 18px; /* 로그인/로그아웃 폰트 크기 */
-            margin-top: 20px; /* 위 여백 추가 */
-            align-self: flex-end; /* 오른쪽 정렬 */
-        }
-        
-        /* 드롭다운 메뉴 스타일 */
-        .dropdown_menu {
-            display: none;
-            position: absolute;
-            background-color: #ff916f92; /* 배경색 변경 */
-            min-width: 160px;
-            z-index: 1;
-        }
-
-        .dropdown_menu a {
-            color: white;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
-
-        /* 마우스 갖다대면 하위 메뉴 표시 */
-        .dropdown_main:hover .dropdown_menu {
-            display: block;
-        }
+        font-family: 'Cafe24Ssurround';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+    }
+    body {
+        font-family: 'Cafe24Ssurround', serif;
+        color: #8B4513; /* Dark warm font color */
+    }
+    header {
+    
+        background-color: #F4A460; /* Sandy brown */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        padding: 5px 0;
+    }
+    .header-top {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+    }
+    .heading {
+        font-size: 48px;
+        margin: 0;
+        color: #6B4423; /* Darker brown */
+    }
+    header img {
+        max-height: 80px;
+    }
+    .menu {
+        max-width: 1200px;
+        margin: 20px 0;
+        display: flex;
+        justify-content: center;
+    }
+    .menu ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+    }
+    .lists li {
+        margin-right: 20px;
+        color: #8B4513; /* Consistent dark warm font color */
+    }
+    .lists li:last-child {
+        margin-right: 0;
+    }
+    .lists a {
+        font-size: 18px;
+        text-decoration: none;
+        color: #D2691E; /* Chocolate color */
+        transition: color 0.3s ease;
+    }
+    .lists a:hover {
+        color: #DEB887; /* Burlywood color on hover */
+    }
+    .log {
+        font-size: 18px;
+        margin-top: 20px;
+        align-self: flex-end;
+    }
+    .dropdown_menu {
+        display: none;
+        position: absolute;
+        background-color: #fb9d7896;  /* Light Salmon color */
+        min-width: 160px;
+        z-index: 1;
+    }
+    .dropdown_menu a {
+        color: #FFF5EE; /* SeaShell color */
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+    .dropdown_main:hover .dropdown_menu {
+        display: block;
+    }
     </style>
 </head>
 <body>
 <header>
-    <h1 class="h1">냠냠북클럽</h1>
+    <div class="header-top">
+        <h1 class="heading">냠냠 북클럽</h1>
+        <img src="https://github.com/Manmandarin/abc/blob/main/%EB%A1%9C%EA%B3%A0.png?raw=true" alt="냠냠 북클럽 로고">
+    </div>
+
     <div class="menu">
         <ul class="lists">
             <li><a href="main.jsp?id=<%=id%>">도서 검색</a></li>

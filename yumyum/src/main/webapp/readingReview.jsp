@@ -12,12 +12,12 @@
             display: flex;
             align-items: flex-start;
             margin: 20px auto; /* 가운데 정렬을 위한 추가 스타일 */
-            max-width: 800px; /* 최대 너비를 지정 */
+            width:80%;
         }
         #reviewsList {
             flex: 1;
             margin-right: 20px;
-            background-color: #FACE5E; /* 왼쪽 박스 배경색 */
+            background-color: #FFDEAD; /* 왼쪽 박스 배경색 */
             padding: 20px; /* 내용과의 간격을 위한 패딩 */
             border-radius: 10px; /* 모서리를 둥글게 만들기 */
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
@@ -26,7 +26,7 @@
         }
         #reviewDetails {
             flex: 1;
-            background-color: #FACE5E; /* 오른쪽 박스 배경색 */
+            background-color: #FFDEAD; /* 오른쪽 박스 배경색 */
             padding: 20px; /* 내용과의 간격을 위한 패딩 */
             border-radius: 10px; /* 모서리를 둥글게 만들기 */
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
@@ -108,7 +108,7 @@
 </script>
 </head>
 <body>
-	<button id="mainButton">메인</button><br>
+    <jsp:include page="./navbar.jsp"></jsp:include>
     <%
     String loggedInUserId = (String) session.getAttribute("id");
     if (loggedInUserId == null) {

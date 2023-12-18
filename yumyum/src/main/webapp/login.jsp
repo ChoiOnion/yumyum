@@ -9,9 +9,10 @@
 </head>
  
 <body>
-    <header>
-        <h1 class="heading">냠냠 북클럽</h1>
-    </header>
+<header>
+	<h1 class="heading">냠냠 북클럽</h1>
+    <img src="https://github.com/Manmandarin/abc/blob/main/%EB%A1%9C%EA%B3%A0.png?raw=true" alt="냠냠 북클럽 로고">
+</header>
  
     <div class="container">
         <div class="slider"></div>
@@ -41,13 +42,13 @@
                     <div class="form-group mb-3">
                         <div class="btn-group" data-toggle="buttons">
                             <input type="radio" class="btn-check" name="gender" id="남자" value="남자" autocomplete="off" checked>
-                            <label class="btn btn-secondary" for="남자">남자</label>
+                            <label class="gender ele" for="남자">남자</label>
                             <input type="radio" class="btn-check" name="gender" id="여자" value="여자" autocomplete="off">
-                            <label class="btn btn-secondary" for="여자">여자</label>
+                            <label class="gender ele" for="여자">여자</label>
                         </div>
                     </div>
                     
-                    <button class="clkbtn" type="submit">회원가입</button>
+                    <button class="clkbtn" type="submit">Sign up</button>
                 </form>
             </div>
         </div>
