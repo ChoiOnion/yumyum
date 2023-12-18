@@ -106,7 +106,7 @@
                 <a href="readingRecords.jsp?id=<%=id%>">독서 기록 페이지</a>
                 <div class="dropdown_menu">
                     <a href="readingRecords.jsp?id=<%=id%>">독서 목록</a>
-                    <a href="readingReview.html?id=<%=id%>">별점 및 서평</a>
+                    <a href="readingReview.jsp?id=<%=id%>">별점 및 서평</a>
                     <a href="readingCalendar.html?id=<%=id%>">캘린더</a>
                     <a href="readingStats.html?id=<%=id%>">통계</a>
                 </div>
