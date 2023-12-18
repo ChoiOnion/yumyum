@@ -28,6 +28,29 @@
         }
     </style>
 <script>
+
+	// URL 파라미터 값을 가져오는 함수
+	function getParameterByName(name, url) {
+  		if (!url) url = window.location.href;
+  		name = name.replace(/[\[\]]/g, "\\$&");
+  		var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+      		results = regex.exec(url);
+  		if (!results) return null;
+  		if (!results[2]) return '';
+  		return decodeURIComponent(results[2].replace(/\+/g, " "));
+	}
+	
+	window.onload = function() {       
+        // 수정된 부분: 버튼 클릭 시 메인 페이지로 이동하도록 처리
+        var mainButton = document.getElementById('mainButton');
+        if (mainButton) {
+            mainButton.addEventListener('click', function() {
+                var idParam = getParameterByName('id');
+                window.location.href = 'main.jsp?id=' + idParam;
+            });
+        }
+    };
+	
     function confirmDelete(bookId) {
         var confirmed = confirm("이 서평을 삭제하시겠습니까?");
         if (confirmed) {
@@ -51,6 +74,7 @@
 </script>
 </head>
 <body>
+	<button id="mainButton">메인</button><br>
     <%
     String loggedInUserId = (String) session.getAttribute("id");
     if (loggedInUserId == null) {

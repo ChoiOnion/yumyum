@@ -146,7 +146,7 @@
                     out.println("<option value='독서중'" + ("독서중".equals(status) ? " selected" : "") + ">독서중</option>");
                     out.println("<option value='독서완료'" + ("독서완료".equals(status) ? " selected" : "") + ">독서완료</option>");
                     out.println("</select>");
-                    out.println("<input type='submit' value='상태 변경'>");
+                    out.println("<input type='submit' value='상태 변경 및 서평 작성'>");
                     out.println("</form>");
                     out.println("</div>");
                 }
