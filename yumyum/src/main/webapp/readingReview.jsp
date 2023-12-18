@@ -6,25 +6,59 @@
 <head>
     <meta charset="UTF-8">
     <title>서평 목록</title>
+    <link rel="stylesheet" href="main.css">
     <style>
         #reviewsContainer {
             display: flex;
             align-items: flex-start;
+            margin: 20px auto; /* 가운데 정렬을 위한 추가 스타일 */
+            max-width: 800px; /* 최대 너비를 지정 */
         }
         #reviewsList {
             flex: 1;
             margin-right: 20px;
-            background-color: #f0f0f0; /* 왼쪽 박스 배경색 */
+            background-color: #FACE5E; /* 왼쪽 박스 배경색 */
             padding: 20px; /* 내용과의 간격을 위한 패딩 */
+            border-radius: 10px; /* 모서리를 둥글게 만들기 */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+            height: 550px;
+            overflow: auto
         }
         #reviewDetails {
             flex: 1;
-            background-color: #e0e0e0; /* 오른쪽 박스 배경색 */
+            background-color: #FACE5E; /* 오른쪽 박스 배경색 */
             padding: 20px; /* 내용과의 간격을 위한 패딩 */
+            border-radius: 10px; /* 모서리를 둥글게 만들기 */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+            height: 550px;
+            overflow: auto
         }
         .review {
             cursor: pointer;
             margin-bottom: 20px;
+            padding: 10px;
+            background-color: #FFEABF; /* 개별 서평의 배경색 */
+            border-radius: 5px; /* 모서리를 둥글게 만들기 */
+            transition: background-color 0.3s ease; /* 부드러운 전환 효과 */
+        }
+        .review:hover {
+            background-color: #f4a460; /* 호버 시 배경색 변경 */
+        }
+        .review h3 {
+            color: #8B4513; /* 서평 제목 색상 */
+            margin-bottom: 10px;
+        }
+        .review p {
+            margin-bottom: 10px;
+        }
+        .review a {
+            color: #8B4513; /* 링크 색상 */
+            text-decoration: none;
+            margin-right: 5px;
+        }
+        .review a:hover {
+        	color: #8B4513;
+            text-decoration: underline; /* 호버 시 밑줄 효과 추가 */
         }
     </style>
 <script>
@@ -114,7 +148,7 @@
             out.println("<h3>" + title + "</h3>");
             out.println("<p>별점: " + starScore + "/5</p>");
             out.println("<p>서평: " + displayReview + "</p>");
-            out.println("<a href='editReview.jsp?bookId=" + bookId + "'>수정</a> | ");
+            out.println("<br><a href='editReview.jsp?bookId=" + bookId + "'>수정</a> | ");
             out.println("<a href='#' onclick='event.stopPropagation(); confirmDelete(\"" + bookId + "\");'>삭제</a>");
             out.println("</div>");
         }
