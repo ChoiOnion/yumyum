@@ -3,47 +3,48 @@ package user;
 
 public class User{
 	
-	private String userId;
-	private String userPassword;
-	private String userName;
-	private String userEmail;
-	private String userSex;
-	private String userPhone;
-
-	public String getUserId() {
-		return userId;
+	private String id;
+	private String pwd;
+	private String mail;
+	private String name;
+	private String phoneNum;
+	private String gender;
+	public String getId() {
+		return id;
 	}
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setId(String id) {
+		this.id = id;
 	}
-	public String getUserPassword() {
-		return userPassword;
+	public String getPwd() {
+		return pwd;
 	}
-	public void setUserPassword(String userPassword) {
-		this.userPassword = userPassword;
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
 	}
-	public String getUserName() {
-		return userName;
+	public String getMail() {
+		return mail;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setMail(String mail) {
+		this.mail = mail;
 	}
-	public String getUserEmail() {
-		return userEmail;
+	public String getName() {
+		return name;
 	}
-	public void setUserEmail(String userEmail) {
-		this.userEmail = userEmail;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public String getUserSex() {
-		return userSex;
+	public String getPhoneNum() {
+		return phoneNum;
 	}
-	public void setUserSex(String userSex) {
-		this.userSex = userSex;
+	public void setPhoneNum(String phoneNum) {
+		this.phoneNum = phoneNum;
 	}
-	public String getUserPhone() {
-		return userPhone;
+	public String getGender() {
+		return gender;
 	}
-	public void setUserPhone(String userPhone) {
-		this.userPhone = userPhone;
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
+	
+	
 }
