@@ -8,6 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <title>게시글 보기</title>
+    <link rel="stylesheet" href="main.css">
 </head>
 <body>
 <%
@@ -65,13 +66,10 @@ function participate() {
 
 %>
                     <h2><%= title %></h2>
-                    <p>작성자: <%= id %></p>
-                    <p>작성 날짜: <%= date %></p>
-                    <p>모임 장소: <%= place %></p>
-                    <p>모임 날짜: <%= meetingDate %></p>
-                    <p>모임 인원: <%= participant %> / <%= headcount %></p>
-                    <p>내용: <%= text %></p>
-                    <button onclick="participate()">참여</button><br>
+                    <p style="width:80%; background-color: #FFEBC2;">작성자: <%= id %> | 작성 날짜: <%= date %><br><br>모임 장소: <%= place %> | 
+                    					  모임 날짜: <%= meetingDate %> | 모임 인원: <%= participant %> / <%= headcount %> <br>
+                    <p style="width:80%; height:150px"><%= text %></p><br>
+                    <button onclick="participate()">참여</button>
     				<button id="boardButton">게시글 목록</button><br>
     				<table id="postTable"></table>
 <%

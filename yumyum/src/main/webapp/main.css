@@ -72,6 +72,35 @@ input[type="submit"]:hover {
     background-color: #c85a17; 
 }
 
+button {
+    border: 1px solid #deb887; 
+    border-radius: 5px; 
+    padding: 10px; 
+    font-size: 16px; 
+    background-color: #f4a460; 
+    color: white; 
+    cursor: pointer; 
+}
+
+button:hover {
+    background-color: #c85a17; 
+}
+
+.custom-button {
+    border: 1px solid #deb887; 
+    border-radius: 5px; 
+    padding: 10px; 
+    font-size: 16px; 
+    background-color: #f4a460; 
+    color: white; 
+    cursor: pointer; 
+}
+
+.custom-button:hover {
+    background-color: #c85a17; 
+}
+
+
 p {
     background-color: #fffaf0;
     padding: 10px;
@@ -93,6 +122,43 @@ p {
 .ranking-item {
     margin: 0 10px; 
 }
+
+#postTable {
+    border-collapse: collapse;
+    width: 80%;
+    margin: 20px auto;
+}
+
+#postTable th, #postTable td {
+    border: 1px solid #deb887;
+    padding: 10px;
+}
+
+#postTable th {
+    background-color: #f4a460;
+    color: white;
+}
+
+.custom-button {
+    border: 1px solid #deb887;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #f4a460;
+    color: white;
+    cursor: pointer;
+}
+
+.custom-button:hover {
+    background-color: #c85a17;
+}
+
+@media (max-width: 768px) {
+    #postTable {
+        width: 90%;
+    }
+}
+
 
 @media (max-width: 768px) {
     form {

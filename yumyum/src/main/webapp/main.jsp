@@ -46,7 +46,7 @@
                     case "title":
                         safeSearchType = "title";
                         break;
-                    case "writter":
+                    case "writer":
                         safeSearchType = "writer";
                         break;
                     case "genre":

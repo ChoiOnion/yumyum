@@ -3,6 +3,7 @@
 <%@ page import="java.util.*"%>
 <%@ page import="java.text.SimpleDateFormat"%>
 <%@ page import="java.net.URLDecoder" %>
+<%request.setCharacterEncoding("UTF-8");%>
 <%
 String id = request.getParameter("id");
 

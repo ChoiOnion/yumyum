@@ -14,6 +14,7 @@
 <head>
     <meta charset="UTF-8">
     <title>독서 토론 게시판</title>
+    <link rel="stylesheet" href="main.css">
 </head>
 <body>
     <script>

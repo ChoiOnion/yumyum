@@ -8,6 +8,16 @@
 <head>
     <meta charset="UTF-8">
     <title>게시글 보기</title>
+    
+    <link rel="stylesheet" href="main.css">
+    <style>
+    ul {
+  list-style-type: none; /* 목록의 기본 스타일(숫자)을 숨김 */
+  counter-reset: my-counter; /* 사용자 정의 카운터 초기화 */
+  text-align:left;
+  padding-left:65px;
+}
+</style>
 </head>
 <body>
 
@@ -50,9 +60,8 @@
                     rsComments = pstmtComments.executeQuery();
 %>
                     <h2><%= title %></h2>
-                    <p>작성자: <%= id %></p>
-                    <p>작성 날짜: <%= date %></p>
-                    <p>내용: <%= text %></p>
+                    <p style="width:80%; background-color: #FFEBC2;">작성자: <%= id %> | 작성 날짜: <%= date %></p><br>
+                    <p style="width:80%; height:150px"><%= text %></p><br>
     				<button id="boardButton">게시글 목록</button><br>
                     <hr>
                      <ul>
@@ -67,10 +76,10 @@
                     }
 %>
                     </ul>
-                    <form action="addComment.jsp" method="post">
+                    <form action="addComment.jsp" method="post" style="width:80%">
                         <input type="hidden" name="num" value="<%= num %>">
                         <input type="hidden" name="id" value="<%= idParam %>">
-                        <textarea id="commentText" name="commentText" required></textarea>
+                        <textarea id="commentText" name="commentText" style="width:80%" required></textarea>
                         <input type="submit" value="댓글 등록">
                     </form>
 <%
