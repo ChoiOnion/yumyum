@@ -8,6 +8,35 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="main.css">
     <title>도서검색 및 추가</title>
+    
+    <style>
+    .record-item {
+        border-bottom: 1px dashed #f4a406; /* 리스트 아이템 사이에 점선 추가 */
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+    }
+
+    .record-item span {
+        margin-right: 10px;
+        font-size: 18px; /* 글씨 크기 조정 */
+    }
+
+    .record-item select, .record-item input[type="submit"] {
+        padding: 8px 10px; /* 드롭다운 및 버튼의 패딩 및 크기 조정 */
+        font-size: 14px; /* 드롭다운 및 버튼의 글씨 크기 조정 */
+    }
+
+    .record-item form {
+        display: flex;
+        align-items: center;
+    }
+
+    .record-item form select {
+        margin-right: 10px;
+    }
+</style>
+
+    
 </head>
 <body>
     <% 
@@ -120,44 +149,48 @@
     <!-- 독서 기록 목록 -->
     <h2>독서 기록 목록</h2>
     <%
-        if (loggedInUserId != null) {
-            try {
-                if (conn == null || conn.isClosed()) {
-                    conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
-                }
-                String sql = "SELECT rr.bookId, rr.startDate, rr.endDate, rr.status, b.title, b.writer "
-                           + "FROM record rr JOIN book b ON rr.bookId = b.bookId "
-                           + "WHERE rr.id = ? ORDER BY rr.status DESC, rr.startDate DESC";
-                pstmt = conn.prepareStatement(sql);
-                pstmt.setString(1, loggedInUserId);
-                rs = pstmt.executeQuery();
-
-                while(rs.next()) {
-                    String bookId = rs.getString("bookId");
-                    String title = rs.getString("title");
-                    String writer = rs.getString("writer");
-                    String status = rs.getString("status");
-
-                    out.println("<div style='margin-bottom: 10px;'>");
-                    out.println("<span style='margin-right: 10px;'>" + title + " / " + writer + " / " + status + "</span>");
-                    out.println("<form method='post' style='display: inline;'>");
-                    out.println("<input type='hidden' name='bookId' value='" + bookId + "'>");
-                    out.println("<select name='newStatus'>");
-                    out.println("<option value='독서중'" + ("독서중".equals(status) ? " selected" : "") + ">독서중</option>");
-                    out.println("<option value='독서완료'" + ("독서완료".equals(status) ? " selected" : "") + ">독서완료</option>");
-                    out.println("</select>");
-                    out.println("<input type='submit' value='상태 변경 및 서평 작성'>");
-                    out.println("</form>");
-                    out.println("</div>");
-                }
-            } catch(Exception e) {
-                e.printStackTrace();
-            } finally {
-                if (rs != null) try { rs.close(); } catch (SQLException e) { e.printStackTrace(); }
-                if (pstmt != null) try { pstmt.close(); } catch (SQLException e) { e.printStackTrace(); }
-                if (conn != null) try { conn.close(); } catch (SQLException e) { e.printStackTrace(); }
+    if (loggedInUserId != null) {
+        try {
+            if (conn == null || conn.isClosed()) {
+                conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
             }
+            String sql = "SELECT rr.bookId, rr.startDate, rr.endDate, rr.status, b.title, b.writer "
+                       + "FROM record rr JOIN book b ON rr.bookId = b.bookId "
+                       + "WHERE rr.id = ? ORDER BY rr.status DESC, rr.startDate DESC";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, loggedInUserId);
+            rs = pstmt.executeQuery();
+
+            int recordNumber = 1;
+            while(rs.next()) {
+                String bookId = rs.getString("bookId");
+                String title = rs.getString("title");
+                String writer = rs.getString("writer");
+                String status = rs.getString("status");
+
+                out.println("<div class='record-item'>");
+                out.println("<span>" + recordNumber + ".</span>");
+                out.println("<span>" + title + " / " + writer + " / " + status + "</span>");
+                out.println("<form method='post' style='display: inline;'>");
+                out.println("<input type='hidden' name='bookId' value='" + bookId + "'>");
+                out.println("<select name='newStatus'>");
+                out.println("<option value='독서중'" + ("독서중".equals(status) ? " selected" : "") + ">독서중</option>");
+                out.println("<option value='독서완료'" + ("독서완료".equals(status) ? " selected" : "") + ">독서완료</option>");
+                out.println("</select>");
+                out.println("<input type='submit' value='상태 변경 및 서평 작성'>");
+                out.println("</form>");
+                out.println("</div>");
+                
+                recordNumber++;
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) try { rs.close(); } catch (SQLException e) { e.printStackTrace(); }
+            if (pstmt != null) try { pstmt.close(); } catch (SQLException e) { e.printStackTrace(); }
+            if (conn != null) try { conn.close(); } catch (SQLException e) { e.printStackTrace(); }
         }
+    }
 
         // 독서 상태 및 endDate 변경 처리
         PreparedStatement pstmtUpdate = null;
