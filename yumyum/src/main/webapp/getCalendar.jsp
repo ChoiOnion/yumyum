@@ -5,6 +5,7 @@
 <%@ page import="org.json.simple.JSONArray" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="org.json.simple.JSONObject" %>
+<% request.setCharacterEncoding("UTF-8"); %>
 
 <%
     String DRIVER = "com.mysql.jdbc.Driver";
