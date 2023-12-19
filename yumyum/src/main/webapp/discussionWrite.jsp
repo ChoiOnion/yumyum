@@ -21,13 +21,13 @@
             background-color: #fff8dc; 
             border-radius: 10px; 
             display: flex; 
-            flex-direction: column; /* 수직 정렬 추가 */
-            align-items: center; /* 수직 정렬 추가 */
+            flex-direction: column; 
+            align-items: center; 
             justify-content: space-around; 
             padding: 20px;
             margin: 20px auto;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
-            width: 60%; /* 폼의 전체 너비 조정 */
+            width: 60%; 
         }
 
         select {
@@ -35,9 +35,9 @@
             border-radius: 5px; 
             padding: 10px; 
             font-size: 16px; 
-            width: 80%; /* 드롭다운의 너비 조정 */
+            width: 80%; 
             box-sizing: border-box; 
-            margin-bottom: 10px; /* 드롭다운과 검색란 사이 간격 추가 */
+            margin-bottom: 10px; 
         }
 
         input[type="text"] {
@@ -45,9 +45,9 @@
             border-radius: 5px; 
             padding: 10px; 
             font-size: 16px; 
-            width: 80%; /* 검색란의 너비 조정 */
+            width: 80%; 
             box-sizing: border-box; 
-            margin-bottom: 10px; /* 검색란과 검색 버튼 사이 간격 추가 */
+            margin-bottom: 10px; 
         }
 
         input[type="submit"] {
@@ -58,7 +58,7 @@
             background-color: #f4a460; 
             color: white; 
             cursor: pointer; 
-            width: 80%; /* 검색 버튼의 너비 조정 */
+            width: 80%; 
         }
 
         input[type="submit"]:hover {
@@ -77,11 +77,13 @@
     </style>
 </head>
 <body>
-<%String loggedInUserId = (String) session.getAttribute("id");
-if (loggedInUserId == null) {
-    out.println("<script>alert('로그인이 필요합니다.'); location.href='login.jsp';</script>");
+<%
+	String loggedInUserId = (String) session.getAttribute("id");
+	if (loggedInUserId == null) {
+    	out.println("<script>alert('로그인이 필요합니다.'); location.href='login.jsp';</script>");
     return;
-}%>
+	}
+%>
     <form action="disWriteDB.jsp?id=<%=loggedInUserId%>" method="post">
         제목: <input type="text" name="title" required><br>
         내용: <textarea name="text" required></textarea><br>

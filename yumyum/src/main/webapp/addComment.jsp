@@ -4,7 +4,7 @@
 <%@ page import="java.util.Date"%>
 <%@ page import="java.text.SimpleDateFormat"%>
 <%request.setCharacterEncoding("UTF-8");%>
-<%
+<% //댓글 추가
     String numParam = request.getParameter("num"); 
     String textParam = request.getParameter("commentText");
     String loggedInUserId = (String) session.getAttribute("id");

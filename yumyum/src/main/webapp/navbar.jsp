@@ -23,11 +23,11 @@
     }
     body {
         font-family: 'Cafe24Ssurround', serif;
-        color: #8B4513; /* Dark warm font color */
+        color: #8B4513; 
     }
     header {
     
-        background-color: #F4A460; /* Sandy brown */
+        background-color: #F4A460; 
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -45,7 +45,7 @@
     .heading {
         font-size: 48px;
         margin: 0;
-        color: #6B4423; /* Darker brown */
+        color: #6B4423;
     }
     header img {
         max-height: 80px;
@@ -64,7 +64,7 @@
     }
     .lists li {
         margin-right: 20px;
-        color: #8B4513; /* Consistent dark warm font color */
+        color: #8B4513; 
     }
     .lists li:last-child {
         margin-right: 0;
@@ -72,11 +72,11 @@
     .lists a {
         font-size: 18px;
         text-decoration: none;
-        color: #D2691E; /* Chocolate color */
+        color: #D2691E; 
         transition: color 0.3s ease;
     }
     .lists a:hover {
-        color: #DEB887; /* Burlywood color on hover */
+        color: #DEB887; 
     }
     .log {
         font-size: 18px;
@@ -86,12 +86,12 @@
     .dropdown_menu {
         display: none;
         position: absolute;
-        background-color: #fb9d7896;  /* Light Salmon color */
+        background-color: #fb9d7896;  
         min-width: 160px;
         z-index: 1;
     }
     .dropdown_menu a {
-        color: #FFF5EE; /* SeaShell color */
+        color: #FFF5EE; 
         padding: 12px 16px;
         text-decoration: none;
         display: block;

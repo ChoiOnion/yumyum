@@ -40,11 +40,9 @@ if (loggedInUserId == null) {
             xmlhttp.send();
         }
 
-        // 페이지 로딩 시 게시판 목록을 가져옴
         window.onload = function() {
             loadPosts();
             
-            // 메인 버튼 이벤트 리스너 추가
             var mainButton = document.getElementById('mainButton');
             if (mainButton) {
                 mainButton.addEventListener('click', function() {
@@ -52,7 +50,6 @@ if (loggedInUserId == null) {
                 });
             }
 
-            // 글 작성 버튼 이벤트 리스너 추가
             var writeButton = document.getElementById('writeButton');
             if (writeButton) {
                 writeButton.addEventListener('click', function() {

@@ -13,12 +13,12 @@
 <body>
 <%
 
-String numParam = request.getParameter("num");
-String loggedInUserId = (String) session.getAttribute("id");
-if (loggedInUserId == null) {
-out.println("<script>alert('로그인이 필요합니다.'); location.href='login.jsp';</script>");
-return;
-}
+	String numParam = request.getParameter("num");
+	String loggedInUserId = (String) session.getAttribute("id");
+	if (loggedInUserId == null) {
+		out.println("<script>alert('로그인이 필요합니다.'); location.href='login.jsp';</script>");
+		return;
+	}
 %>
 <script>
 function participate() {
@@ -35,7 +35,6 @@ function participate() {
 }
 </script>
 <%
-    // 게시글 번호를 파라미터로부터 가져옴
     if (numParam != null) {
         try {
             int num = Integer.parseInt(numParam);
@@ -52,7 +51,6 @@ function participate() {
                 Class.forName(driverName);
                 conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
 
-                // 해당 게시글 조회
                 String sql = "SELECT * FROM meeting WHERE num = ?";
                 pstmt = conn.prepareStatement(sql);
                 pstmt.setInt(1, num);
@@ -78,7 +76,6 @@ function participate() {
     				<table id="postTable"></table>
 <%
                 } else {
-                    // 해당 번호의 게시글이 없을 경우 처리
                     out.println("해당 번호의 게시글을 찾을 수 없습니다.");
                 }
             } catch (Exception e) {
@@ -96,22 +93,10 @@ function participate() {
     }
 %>
 <script>
-
-function getParameterByName(name, url) {
-	  if (!url) url = window.location.href;
-	  name = name.replace(/[\[\]]/g, "\\$&");
-	  var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-	      results = regex.exec(url);
-	  if (!results) return null;
-	  if (!results[2]) return '';
-	  return decodeURIComponent(results[2].replace(/\+/g, " "));
-	}
-
 	window.onload = function() {
 	    var boardButton = document.getElementById('boardButton');
 	    if (boardButton) {
 	    	boardButton.addEventListener('click', function() {
-	            var idParam = getParameterByName('id');
 	            window.location.href = 'meetingBoard.jsp';
 	        });
 	    }

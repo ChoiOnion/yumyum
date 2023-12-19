@@ -5,11 +5,11 @@
 <%@ page import="java.net.URLDecoder" %>
 <%request.setCharacterEncoding("UTF-8");%>
 <%
-String loggedInUserId = (String) session.getAttribute("id");
-if (loggedInUserId == null) {
-out.println("<script>alert('로그인이 필요합니다.'); location.href='login.jsp';</script>");
-return;
-}
+	String loggedInUserId = (String) session.getAttribute("id");
+	if (loggedInUserId == null) {
+		out.println("<script>alert('로그인이 필요합니다.'); location.href='login.jsp';</script>");
+		return;
+	}
 
     Connection conn = null;
     ResultSet rs = null;
@@ -27,7 +27,6 @@ return;
         Class.forName(driverName);
         conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
 
-        // SQL 쿼리 실행
         String sql = "SELECT COUNT(bookID) AS oneBookCount FROM record WHERE MONTH(endDate) = MONTH(CURRENT_DATE) AND id = ?";
         pstmt = conn.prepareStatement(sql);
         pstmt.setString(1,loggedInUserId);
@@ -43,23 +42,18 @@ return;
         pstmt3.setString(1, loggedInUserId);
         rs3 = pstmt3.executeQuery();
 
-
-        // 결과를 저장할 변수
         int oneBookCount = 0;
         int twoBookCount = 0;
         int threeBookCount = 0;
 
-     // 결과를 변수에 저장
         if (rs.next()) {
             oneBookCount = rs.getInt("oneBookCount");
         }
 
-        // rs2에 대해서도 동일하게 적용
         if (rs2.next()) {
             twoBookCount = rs2.getInt("twoBookCount");
         }
 
-        // rs3에 대해서도 동일하게 적용
         if (rs3.next()) {
             threeBookCount = rs3.getInt("threeBookCount");
         }

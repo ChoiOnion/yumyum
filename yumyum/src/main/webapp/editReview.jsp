@@ -92,7 +92,6 @@
     String review = "";
     float starScore = 0;
 
-    // Database connection parameters
     String dbURL = "jdbc:mysql://localhost:3306/nyamnyam?useUnicode=true&characterEncoding=UTF-8";
     String dbID = "root";
     String dbPassword = "1234";
@@ -101,8 +100,7 @@
     try {
         Class.forName(driverName);
         conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
-
-        // Only fetch review if request is not a POST (to avoid overwriting user's current edit)
+        
         if(!"POST".equalsIgnoreCase(request.getMethod())) {
             String sql = "SELECT review, starScore FROM record WHERE bookId = ? AND id = ?";
             pstmt = conn.prepareStatement(sql);
@@ -124,7 +122,6 @@
         if (conn != null) try { conn.close(); } catch (SQLException e) { e.printStackTrace(); }
     }
 
-    // Handling form submission
     if("POST".equalsIgnoreCase(request.getMethod())) {
         review = request.getParameter("review");
         try {

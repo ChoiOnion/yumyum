@@ -15,12 +15,11 @@
 <body>
 
     <%
-    
     String loggedInUserId = (String) session.getAttribute("id");
-if (loggedInUserId == null) {
-out.println("<script>alert('로그인이 필요합니다.'); location.href='login.jsp';</script>");
-return;
-}
+	if (loggedInUserId == null) {
+		out.println("<script>alert('로그인이 필요합니다.'); location.href='login.jsp';</script>");
+		return;
+	}
 
         Connection conn = null;
         Statement stmt = null;

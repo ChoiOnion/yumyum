@@ -22,13 +22,12 @@
 
 <body>
 <%
-String loggedInUserId = (String) session.getAttribute("id");
-if (loggedInUserId == null) {
-out.println("<script>alert('로그인이 필요합니다.'); location.href='login.jsp';</script>");
-return;
-}
+	String loggedInUserId = (String) session.getAttribute("id");
+	if (loggedInUserId == null) {
+		out.println("<script>alert('로그인이 필요합니다.'); location.href='login.jsp';</script>");
+		return;
+	}
 %>
-    <!-- 실제 화면을 담을 영역 -->
     <p id='calendar'></p>
     <button id="mainButton" >메인</button>
     <script>
@@ -47,7 +46,7 @@ return;
 
         $(function () {
             var request = $.ajax({
-                url: "getCalendar.jsp?id=<%=loggedInUserId%>", // 여기에 적절한 id 값을 넣어주세요.
+                url: "getCalendar.jsp?id=<%=loggedInUserId%>", 
                 method: "GET",
                 dataType: "json"
             });
@@ -85,7 +84,7 @@ return;
                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                 }
             };
-            xmlhttp.open("GET", "getCalendar.jsp?id=<%=loggedInUserId%>", true); // 여기에 적절한 id 값을 넣어주세요.
+            xmlhttp.open("GET", "getCalendar.jsp?id=<%=loggedInUserId%>", true); 
             xmlhttp.send();
         }
     </script>

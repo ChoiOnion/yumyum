@@ -8,26 +8,23 @@
 <head>
     <meta charset="UTF-8">
     <title>게시글 보기</title>
-    
     <link rel="stylesheet" href="main.css">
     <style>
     ul {
-  list-style-type: none; /* 목록의 기본 스타일(숫자)을 숨김 */
-  counter-reset: my-counter; /* 사용자 정의 카운터 초기화 */
+  list-style-type: none; 
+  counter-reset: my-counter; 
   text-align:left;
   padding-left:65px;
 }
 </style>
 </head>
 <body>
-
 <%
-String loggedInUserId = (String) session.getAttribute("id");
-if (loggedInUserId == null) {
-    out.println("<script>alert('로그인이 필요합니다.'); location.href='login.jsp';</script>");
+	String loggedInUserId = (String) session.getAttribute("id");
+	if (loggedInUserId == null) {
+    	out.println("<script>alert('로그인이 필요합니다.'); location.href='login.jsp';</script>");
     return;
-}
-    // 게시글 번호를 파라미터로부터 가져옴
+	}
     String numParam = request.getParameter("num");
     if (numParam != null) {
         try {

@@ -4,11 +4,6 @@
 <%@ page import="java.text.SimpleDateFormat"%>
 <% 
     request.setCharacterEncoding("UTF-8");
-String loggedInUserId = (String) session.getAttribute("id");
-if (loggedInUserId == null) {
-out.println("<script>alert('로그인이 필요합니다.'); location.href='login.jsp';</script>");
-return;
-}
 %>
 <!DOCTYPE html>
 <html>
@@ -18,11 +13,13 @@ return;
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
-    <script>
-        var javascriptId = '<%=loggedInUserId%>';
-    </script>
-
     <%
+    String loggedInUserId = (String) session.getAttribute("id");
+	if (loggedInUserId == null) {
+		out.println("<script>alert('로그인이 필요합니다.'); location.href='login.jsp';</script>");
+		return;
+	}
+	
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;

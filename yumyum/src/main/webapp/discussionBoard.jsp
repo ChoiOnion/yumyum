@@ -10,11 +10,11 @@
 </head>
 <body>
 <%
-String loggedInUserId = (String) session.getAttribute("id");
-if (loggedInUserId == null) {
-    out.println("<script>alert('로그인이 필요합니다.'); location.href='login.jsp';</script>");
-    return;
-}
+	String loggedInUserId = (String) session.getAttribute("id");
+	if (loggedInUserId == null) {
+    	out.println("<script>alert('로그인이 필요합니다.'); location.href='login.jsp';</script>");
+    	return;
+	}
 %>
     <table border="1" id="postTable">
         <tr>

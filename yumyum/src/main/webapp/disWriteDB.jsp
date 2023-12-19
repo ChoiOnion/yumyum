@@ -18,16 +18,14 @@
     }
 
     try {
-        // 자동으로 증가하는 변수를 저장할 AtomicInteger 객체 생성
+        // 자동으로 증가하는 변수를 저장할 AtomicInteger 객체 생성(글 번호)
         AtomicInteger autoIncrement1 = (AtomicInteger) application.getAttribute("autoIncrement");
 
-        // 만약에 객체가 없다면 초기값으로 설정
         if (autoIncrement1 == null) {
         	autoIncrement1 = new AtomicInteger(0);
             application.setAttribute("autoIncrement", autoIncrement1);
         }
 
-        // 다음 증가된 값을 얻어오고, application에 저장
         int nextValue = autoIncrement1.getAndIncrement();
         application.setAttribute("autoIncrement", autoIncrement1);
 

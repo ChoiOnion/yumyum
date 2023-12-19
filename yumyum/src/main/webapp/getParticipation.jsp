@@ -6,9 +6,9 @@
     request.setCharacterEncoding("UTF-8");
     String numParam = request.getParameter("num");
     String loggedInUserId = (String) session.getAttribute("id");
-    if (loggedInUserId == null) {
-    out.println("<script>alert('로그인이 필요합니다.'); location.href='login.jsp';</script>");
-    return;
+    	if (loggedInUserId == null) {
+    	out.println("<script>alert('로그인이 필요합니다.'); location.href='login.jsp';</script>");
+    	return;
     }
 %>
 <!DOCTYPE html>
@@ -37,7 +37,6 @@
             Class.forName(driverName);
             conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
 
-            // participant 테이블에서 idParam과 numParam이 일치하는지 확인하는 쿼리
             String sqlCheck = "SELECT COUNT(*) AS count FROM participant WHERE id = ? AND num = ?";
             pstmtCheck = conn.prepareStatement(sqlCheck);
             pstmtCheck.setString(1, loggedInUserId);
@@ -46,8 +45,7 @@
             rsCheck.next();
             int count = rsCheck.getInt("count");
 
-            if (count > 0) { // idParam과 numParam이 일치하는 경우에만 참여자 목록을 가져옴
-                // participant 테이블과 member 테이블을 id를 기준으로 조인하여 id와 name을 가져오는 쿼리
+            if (count > 0) {
                 String sql = "SELECT p.id, m.name FROM participant p JOIN member m ON p.id = m.id WHERE p.num = ?";
                 pstmt = conn.prepareStatement(sql);
                 pstmt.setInt(1, num);

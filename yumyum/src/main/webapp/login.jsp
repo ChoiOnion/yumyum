@@ -22,7 +22,6 @@
         </div>
  
         <div class="form-section">
-            <!-- Existing login form (previous code) -->
             <div class="login-box">
                 <form method="post" action="loginAction.jsp">
                     <input type="text" class="email ele" name="id" placeholder="아이디">
@@ -31,7 +30,6 @@
                 </form>
             </div>
  
-            <!-- 회원가입 폼 -->
             <div class="signup-box">
                 <form method="post" action="joinAction.jsp">
                     <input type="text" class="name ele" name="id" placeholder="아이디">

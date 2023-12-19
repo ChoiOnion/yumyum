@@ -28,7 +28,7 @@
         Class.forName(driverName);
         conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
 
-        // 서평 삭제
+        //서평 삭제
         String sqlDeleteReview = "UPDATE record SET review = NULL, starScore = NULL WHERE bookId = ? AND id = ?";
         pstmt = conn.prepareStatement(sqlDeleteReview);
         pstmt.setString(1, bookId);

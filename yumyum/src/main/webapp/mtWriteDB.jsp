@@ -6,11 +6,12 @@
 <%@ page import="java.util.concurrent.atomic.AtomicInteger" %>
 <%request.setCharacterEncoding("UTF-8");%>
 <%
-String loggedInUserId = (String) session.getAttribute("id");
-if (loggedInUserId == null) {
-out.println("<script>alert('로그인이 필요합니다.'); location.href='login.jsp';</script>");
-return;
-}
+	String loggedInUserId = (String) session.getAttribute("id");
+	if (loggedInUserId == null) {
+		out.println("<script>alert('로그인이 필요합니다.'); location.href='login.jsp';</script>");
+		return;
+	}
+	
     String title = request.getParameter("title");
     String text = request.getParameter("text");
     String place = request.getParameter("place");
@@ -21,16 +22,13 @@ return;
     PreparedStatement pstmt = null;
 
     try {
-        // 자동으로 증가하는 변수를 저장할 AtomicInteger 객체 생성
+        // 자동으로 증가하는 변수를 저장할 AtomicInteger 객체 생성 (글번호)
         AtomicInteger autoIncrement2 = (AtomicInteger) application.getAttribute("autoIncrement2");
-
-        // 만약에 객체가 없다면 초기값으로 설정
         if (autoIncrement2 == null) {
         	autoIncrement2 = new AtomicInteger(0);
             application.setAttribute("autoIncrement2", autoIncrement2);
         }
 
-        // 다음 증가된 값을 얻어오고, application에 저장
         int nextValue = autoIncrement2.getAndIncrement();
         application.setAttribute("autoIncrement2", autoIncrement2);
         
