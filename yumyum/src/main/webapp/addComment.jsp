@@ -6,10 +6,14 @@
 <%request.setCharacterEncoding("UTF-8");%>
 <%
     String numParam = request.getParameter("num"); 
-    String idParam = request.getParameter("id");   
     String textParam = request.getParameter("commentText");
+    String loggedInUserId = (String) session.getAttribute("id");
+    if (loggedInUserId == null) {
+        out.println("<script>alert('로그인이 필요합니다.'); location.href='login.jsp';</script>");
+        return;
+    }
 
-    if (numParam != null && idParam != null && textParam != null) {
+    if (numParam != null && loggedInUserId != null && textParam != null) {
         try {
             int num = Integer.parseInt(numParam);
 
@@ -27,7 +31,7 @@
                 String insertCommentQuery = "INSERT INTO comment (num, id, text, date) VALUES (?, ?, ?, ?)";
                 pstmt = conn.prepareStatement(insertCommentQuery);
                 pstmt.setInt(1, num);
-                pstmt.setString(2, idParam);
+                pstmt.setString(2, loggedInUserId);
                 pstmt.setString(3, textParam);
                 pstmt.setString(4, new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
                 pstmt.executeUpdate();
@@ -40,5 +44,5 @@
         } catch (NumberFormatException e) {
         }
     }
-    response.sendRedirect("discussionView.jsp?num=" + numParam+"&id="+idParam);
+    response.sendRedirect("discussionView.jsp?num=" + numParam);
 %>

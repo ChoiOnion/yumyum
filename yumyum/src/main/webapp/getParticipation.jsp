@@ -4,10 +4,11 @@
 <%@ page import="java.text.SimpleDateFormat"%>
 <% 
     request.setCharacterEncoding("UTF-8");
-    String idParam = request.getParameter("id");
     String numParam = request.getParameter("num");
-    if (idParam == null) {
-    	idParam = "null";
+    String loggedInUserId = (String) session.getAttribute("id");
+    if (loggedInUserId == null) {
+    out.println("<script>alert('로그인이 필요합니다.'); location.href='login.jsp';</script>");
+    return;
     }
 %>
 <!DOCTYPE html>
@@ -39,7 +40,7 @@
             // participant 테이블에서 idParam과 numParam이 일치하는지 확인하는 쿼리
             String sqlCheck = "SELECT COUNT(*) AS count FROM participant WHERE id = ? AND num = ?";
             pstmtCheck = conn.prepareStatement(sqlCheck);
-            pstmtCheck.setString(1, idParam);
+            pstmtCheck.setString(1, loggedInUserId);
             pstmtCheck.setInt(2, num);
             rsCheck = pstmtCheck.executeQuery();
             rsCheck.next();

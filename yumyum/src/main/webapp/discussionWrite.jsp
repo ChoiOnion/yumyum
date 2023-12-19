@@ -77,8 +77,12 @@
     </style>
 </head>
 <body>
-<%String idParam = request.getParameter("id");%>
-    <form action="disWriteDB.jsp?id=<%=idParam%>" method="post">
+<%String loggedInUserId = (String) session.getAttribute("id");
+if (loggedInUserId == null) {
+    out.println("<script>alert('로그인이 필요합니다.'); location.href='login.jsp';</script>");
+    return;
+}%>
+    <form action="disWriteDB.jsp?id=<%=loggedInUserId%>" method="post">
         제목: <input type="text" name="title" required><br>
         내용: <textarea name="text" required></textarea><br>
         <input type="submit" value="확인">

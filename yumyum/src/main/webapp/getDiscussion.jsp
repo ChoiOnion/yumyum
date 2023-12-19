@@ -4,10 +4,6 @@
 <%@ page import="java.text.SimpleDateFormat"%>
 <% 
     request.setCharacterEncoding("UTF-8");
-    String id = request.getParameter("id");
-    if (id == null) {
-        id = "null";
-    }
 %>
 <!DOCTYPE html>
 <html>
@@ -17,11 +13,15 @@
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
-    <script>
-        var javascriptId = '<%=id%>';
-    </script>
 
     <%
+    
+    String loggedInUserId = (String) session.getAttribute("id");
+if (loggedInUserId == null) {
+out.println("<script>alert('로그인이 필요합니다.'); location.href='login.jsp';</script>");
+return;
+}
+
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;
@@ -55,7 +55,7 @@
 
                 tableHTML.append("<tr>");
                 tableHTML.append("<td>").append(num).append("</td>");
-                tableHTML.append("<td><a href=\"discussionView.jsp?num=").append(num).append("&id=").append(id).append("\">").append(title).append("</a></td>");
+                tableHTML.append("<td><a href=\"discussionView.jsp?num=").append(num).append("\">").append(title).append("</a></td>");
                 tableHTML.append("<td>").append(writerId).append("</td>");
                 tableHTML.append("<td>").append(date).append("</td>");
                 tableHTML.append("</tr>");

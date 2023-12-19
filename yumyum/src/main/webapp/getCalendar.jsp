@@ -18,19 +18,23 @@
     ResultSet rs = null;
 
     try {
-        // DB 연결
+        // DB ì°ê²°
         Class.forName(DRIVER);
         con = DriverManager.getConnection(DBURL, DBID, DBPW);
 
-        // URL로부터 id 파라미터 받아오기
-        String idParam = request.getParameter("id");
+        // URLë¡ë¶í° id íë¼ë¯¸í° ë°ìì¤ê¸°
+		    String loggedInUserId = (String) session.getAttribute("id");
+    if (loggedInUserId == null) {
+        out.println("<script>alert('로그인이 필요합니다.'); location.href='login.jsp';</script>");
+        return;
+    }
 
-        // SQL 쿼리
+        // SQL ì¿¼ë¦¬
         String sql = "SELECT record.id, book.title, record.startDate, record.endDate FROM record, book WHERE id = ? AND book.bookId = record.bookId";
         pstmt = con.prepareStatement(sql);
-        pstmt.setString(1, idParam);
+        pstmt.setString(1, loggedInUserId);
 
-        // 쿼리 실행
+        // ì¿¼ë¦¬ ì¤í
         rs = pstmt.executeQuery();
 
         List<JSONObject> eventsList = new ArrayList<>();
@@ -42,15 +46,15 @@
             Timestamp endDateTimestamp = rs.getTimestamp("endDate");
             
             if(endDateTimestamp!=null){
-            	// startDate, endDate를 Date 객체로 변환
+            	// startDate, endDateë¥¼ Date ê°ì²´ë¡ ë³í
                 Date startDate = new Date(startDateTimestamp.getTime()+ (24 * 60 * 60 * 1000));
                 Date endDate = new Date(endDateTimestamp.getTime()+ (24 * 60 * 60 * 1000));
 
-                // 날짜를 ISO 8601 형식으로 변환
+                // ë ì§ë¥¼ ISO 8601 íìì¼ë¡ ë³í
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
                 sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
 
-                // JSON 객체 생성하여 리스트에 추가
+                // JSON ê°ì²´ ìì±íì¬ ë¦¬ì¤í¸ì ì¶ê°
                 JSONObject event = new JSONObject();
                 event.put("title", bookId);
                 event.put("start", sdf.format(startDate));
@@ -68,7 +72,7 @@
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
-        // JSON array를 응답으로 보내기
+        // JSON arrayë¥¼ ìëµì¼ë¡ ë³´ë´ê¸°
         out.print(jsonArray.toJSONString());
 
     } catch (ClassNotFoundException | SQLException e) {

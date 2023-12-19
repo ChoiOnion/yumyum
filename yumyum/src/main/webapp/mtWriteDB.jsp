@@ -6,7 +6,11 @@
 <%@ page import="java.util.concurrent.atomic.AtomicInteger" %>
 <%request.setCharacterEncoding("UTF-8");%>
 <%
-	String id = request.getParameter("id");
+String loggedInUserId = (String) session.getAttribute("id");
+if (loggedInUserId == null) {
+out.println("<script>alert('로그인이 필요합니다.'); location.href='login.jsp';</script>");
+return;
+}
     String title = request.getParameter("title");
     String text = request.getParameter("text");
     String place = request.getParameter("place");
@@ -41,7 +45,7 @@
         pstmt = conn.prepareStatement(sql);
         pstmt.setInt(1, nextValue);
         pstmt.setString(2, title);
-        pstmt.setString(3, id); 
+        pstmt.setString(3, loggedInUserId); 
         pstmt.setString(4, new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
         pstmt.setString(5, text);
         pstmt.setString(6 , place);
@@ -59,5 +63,5 @@
 
 <script>
     alert("글이 작성되었습니다.");
-    location.href="meetingBoard.html?id=<%=id%>";
+    location.href="meetingBoard.jsp";
 </script>

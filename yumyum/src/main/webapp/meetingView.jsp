@@ -14,12 +14,16 @@
 <%
 
 String numParam = request.getParameter("num");
-String idParam = request.getParameter("id");
+String loggedInUserId = (String) session.getAttribute("id");
+if (loggedInUserId == null) {
+out.println("<script>alert('로그인이 필요합니다.'); location.href='login.jsp';</script>");
+return;
+}
 %>
 <script>
 function participate() {
     var xmlhttp = new XMLHttpRequest();
-    var url = "mtParticipate.jsp?num=<%=numParam%>&id=<%=idParam%>";
+    var url = "mtParticipate.jsp?num=<%=numParam%>&id=<%=loggedInUserId%>";
     xmlhttp.open("POST", url, true);
     xmlhttp.send();
     xmlhttp.onreadystatechange = function() {
@@ -108,7 +112,7 @@ function getParameterByName(name, url) {
 	    if (boardButton) {
 	    	boardButton.addEventListener('click', function() {
 	            var idParam = getParameterByName('id');
-	            window.location.href = 'meetingBoard.html?id=' + idParam;
+	            window.location.href = 'meetingBoard.jsp';
 	        });
 	    }
 		loadParticipation();
@@ -121,9 +125,8 @@ function getParameterByName(name, url) {
                 document.getElementById("postTable").innerHTML = xmlhttp.responseText;
             }
         };
-        var idParam = getParameterByName('id');
         var numParam = getParameterByName('num');
-        xmlhttp.open("GET", "getParticipation.jsp?id="+idParam+"&num="+numParam, true);
+        xmlhttp.open("GET", "getParticipation.jsp?num="+numParam, true);
         xmlhttp.send();
     }
 </script>

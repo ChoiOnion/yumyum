@@ -3,7 +3,11 @@
 <%request.setCharacterEncoding("UTF-8");%>
 <%
     String numParam = request.getParameter("num");
-	String idParam = request.getParameter("id");
+String loggedInUserId = (String) session.getAttribute("id");
+if (loggedInUserId == null) {
+out.println("<script>alert('로그인이 필요합니다.'); location.href='login.jsp';</script>");
+return;
+}
 
 if (numParam != null) {
     try {
@@ -26,7 +30,7 @@ if (numParam != null) {
             String checkParticipantQuery = "SELECT id FROM participant WHERE num = ? AND id = ?";
             pstmtParticipantCheck = conn.prepareStatement(checkParticipantQuery);
             pstmtParticipantCheck.setInt(1, num);
-            pstmtParticipantCheck.setString(2, idParam);
+            pstmtParticipantCheck.setString(2, loggedInUserId);
             ResultSet rs = pstmtParticipantCheck.executeQuery();
 
             if (rs.next()) {
@@ -43,7 +47,7 @@ if (numParam != null) {
                     String insertParticipantQuery = "INSERT INTO participant (num, id) VALUES (?, ?)";
                     pstmtParticipantInsert = conn.prepareStatement(insertParticipantQuery);
                     pstmtParticipantInsert.setInt(1, num);
-                    pstmtParticipantInsert.setString(2, idParam); 
+                    pstmtParticipantInsert.setString(2, loggedInUserId); 
                     pstmtParticipantInsert.executeUpdate();
                     out.println("참여가 완료되었습니다.");
                 } else {

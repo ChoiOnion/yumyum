@@ -5,7 +5,11 @@
 <%@ page import="java.net.URLDecoder" %>
 <%request.setCharacterEncoding("UTF-8");%>
 <%
-String id = request.getParameter("id");
+String loggedInUserId = (String) session.getAttribute("id");
+if (loggedInUserId == null) {
+out.println("<script>alert('로그인이 필요합니다.'); location.href='login.jsp';</script>");
+return;
+}
 
     Connection conn = null;
     ResultSet rs = null;
@@ -26,17 +30,17 @@ String id = request.getParameter("id");
         // SQL 쿼리 실행
         String sql = "SELECT COUNT(bookID) AS oneBookCount FROM record WHERE MONTH(endDate) = MONTH(CURRENT_DATE) AND id = ?";
         pstmt = conn.prepareStatement(sql);
-        pstmt.setString(1, id);
+        pstmt.setString(1,loggedInUserId);
         rs = pstmt.executeQuery();
 
         String sql2 = "SELECT COUNT(bookID) AS twoBookCount FROM record WHERE MONTH(endDate) = (MONTH(CURRENT_DATE)-1) AND id = ?";
         pstmt2 = conn.prepareStatement(sql2);
-        pstmt2.setString(1, id);
+        pstmt2.setString(1, loggedInUserId);
         rs2 = pstmt2.executeQuery();
 
         String sql3 = "SELECT COUNT(bookID) AS threeBookCount FROM record WHERE MONTH(endDate) = (MONTH(CURRENT_DATE)-2) AND id = ?";
         pstmt3 = conn.prepareStatement(sql3);
-        pstmt3.setString(1, id);
+        pstmt3.setString(1, loggedInUserId);
         rs3 = pstmt3.executeQuery();
 
 

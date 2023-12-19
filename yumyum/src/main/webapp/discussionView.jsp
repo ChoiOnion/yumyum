@@ -22,9 +22,13 @@
 <body>
 
 <%
+String loggedInUserId = (String) session.getAttribute("id");
+if (loggedInUserId == null) {
+    out.println("<script>alert('로그인이 필요합니다.'); location.href='login.jsp';</script>");
+    return;
+}
     // 게시글 번호를 파라미터로부터 가져옴
     String numParam = request.getParameter("num");
-	String idParam = request.getParameter("id");
     if (numParam != null) {
         try {
             int num = Integer.parseInt(numParam);
@@ -71,14 +75,14 @@
                         String commentText = rsComments.getString("text");
                         String commentDate = new SimpleDateFormat("yyyy-MM-dd").format(rsComments.getTimestamp("date"));
 %>
-                        <li><strong><%= commentUserId %></strong>: <%= commentText %> (작성일: <%= commentDate %>)</li>
+                        <li style="margin-left:5%"><strong><%= commentUserId %></strong>: <%= commentText %> (작성일: <%= commentDate %>)</li>
 <%
                     }
 %>
                     </ul>
                     <form action="addComment.jsp" method="post" style="width:80%">
                         <input type="hidden" name="num" value="<%= num %>">
-                        <input type="hidden" name="id" value="<%= idParam %>">
+                        <input type="hidden" name="id" value="<%= loggedInUserId %>">
                         <textarea id="commentText" name="commentText" style="width:80%" required></textarea>
                         <input type="submit" value="댓글 등록">
                     </form>
@@ -101,23 +105,12 @@
     }
 %>
 <script>
-// URL 파라미터 값을 가져오는 함수
-function getParameterByName(name, url) {
-  if (!url) url = window.location.href;
-  name = name.replace(/[\[\]]/g, "\\$&");
-  var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-      results = regex.exec(url);
-  if (!results) return null;
-  if (!results[2]) return '';
-  return decodeURIComponent(results[2].replace(/\+/g, " "));
-}
 
 window.onload = function() {
     var boardButton = document.getElementById('boardButton');
     if (boardButton) {
     	boardButton.addEventListener('click', function() {
-            var idParam = getParameterByName('id');
-            window.location.href = 'discussionBoard.html?id=' + idParam;
+            window.location.href = 'discussionBoard.jsp';
         });
     }
 };

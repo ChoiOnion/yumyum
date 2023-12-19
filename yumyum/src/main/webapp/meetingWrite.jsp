@@ -77,8 +77,14 @@
     </style>
 </head>
 <body>
-<%String id = request.getParameter("id");%>
-	<form action="mtWriteDB.jsp?id=<%= id %>" method="post" >
+<%
+String loggedInUserId = (String) session.getAttribute("id");
+if (loggedInUserId == null) {
+out.println("<script>alert('로그인이 필요합니다.'); location.href='login.jsp';</script>");
+return;
+}
+%>
+	<form action="mtWriteDB.jsp?id=<%= loggedInUserId %>" method="post" >
         제목: <input type="text" name="title" required><br>
         모임 인원: <input type="number" name="headcount" min=2 required><br>
         모임 날짜: <input type="date" id="meetingDate" name="meetingDate" required><br>

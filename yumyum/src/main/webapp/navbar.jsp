@@ -110,16 +110,16 @@
 
     <div class="menu">
         <ul class="lists">
-            <li><a href="main.jsp?id=<%=id%>">도서 검색</a></li>
-            <li><a href="discussionBoard.html?id=<%=id%>">독서 토론 게시판</a></li>
-            <li><a href="meetingBoard.html?id=<%=id%>">독서 모임 게시판</a></li>
+            <li><a href="main.jsp">도서 검색</a></li>
+            <li><a href="discussionBoard.jsp">독서 토론 게시판</a></li>
+            <li><a href="meetingBoard.jsp">독서 모임 게시판</a></li>
             <li class="dropdown_main">
-                <a href="readingRecords.jsp?id=<%=id%>">독서 기록 페이지</a>
+                <a href="readingRecords.jsp">독서 기록 페이지</a>
                 <div class="dropdown_menu">
-                    <a href="readingRecords.jsp?id=<%=id%>">독서 목록</a>
-                    <a href="readingReview.jsp?id=<%=id%>">별점 및 서평</a>
-                    <a href="readingCalendar.html?id=<%=id%>">캘린더</a>
-                    <a href="readingStats.html?id=<%=id%>">통계</a>
+                    <a href="readingRecords.jsp">독서 목록</a>
+                    <a href="readingReview.jsp">별점 및 서평</a>
+                    <a href="readingCalendar.jsp">캘린더</a>
+                    <a href="readingStats.jsp">통계</a>
                 </div>
             </li>
         </ul>

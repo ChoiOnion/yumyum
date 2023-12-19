@@ -4,10 +4,11 @@
 <%@ page import="java.text.SimpleDateFormat"%>
 <% 
     request.setCharacterEncoding("UTF-8");
-    String id = request.getParameter("id");
-    if (id == null) {
-        id = "null";
-    }
+String loggedInUserId = (String) session.getAttribute("id");
+if (loggedInUserId == null) {
+out.println("<script>alert('로그인이 필요합니다.'); location.href='login.jsp';</script>");
+return;
+}
 %>
 <!DOCTYPE html>
 <html>
@@ -18,7 +19,7 @@
 </head>
 <body>
     <script>
-        var javascriptId = '<%=id%>';
+        var javascriptId = '<%=loggedInUserId%>';
     </script>
 
     <%
@@ -62,7 +63,7 @@
 
                 tableHTML.append("<tr>");
                 tableHTML.append("<td>").append(num).append("</td>");
-                tableHTML.append("<td><a href=\"meetingView.jsp?num=").append(num).append("&id=").append(id).append("\">").append(title).append("</a></td>");
+                tableHTML.append("<td><a href=\"meetingView.jsp?num=").append(num).append("\">").append(title).append("</a></td>");
                 tableHTML.append("<td>").append(writerId).append("</td>");
                 tableHTML.append("<td>").append(place).append("</td>");
                 tableHTML.append("<td>").append(meetingDate).append("</td>");

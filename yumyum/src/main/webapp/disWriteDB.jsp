@@ -8,9 +8,14 @@
 <%
     String title = request.getParameter("title");
     String text = request.getParameter("text");
-    String id = request.getParameter("id");
     Connection conn = null;
     PreparedStatement pstmt = null;
+    
+    String loggedInUserId = (String) session.getAttribute("id");
+    if (loggedInUserId == null) {
+        out.println("<script>alert('로그인이 필요합니다.'); location.href='login.jsp';</script>");
+        return;
+    }
 
     try {
         // 자동으로 증가하는 변수를 저장할 AtomicInteger 객체 생성
@@ -37,7 +42,7 @@
         pstmt = conn.prepareStatement(sql);
         pstmt.setInt(1, nextValue);
         pstmt.setString(2, title);
-        pstmt.setString(3, id); 
+        pstmt.setString(3, loggedInUserId); 
         pstmt.setString(4, new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
         pstmt.setString(5, text);
         pstmt.setInt(6, 0);
@@ -52,5 +57,5 @@
 
 <script>
     alert("글이 작성되었습니다.");
-    location.href="discussionBoard.html?id=<%=id%>";
+    location.href="discussionBoard.jsp";
 </script>

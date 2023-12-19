@@ -36,7 +36,7 @@ form {
     margin: 20px auto;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
     width: 50%; /* 폼의 전체 너비 조정 */
-    overflow-y: auto; /
+    overflow-y: auto; 
 }
 
 select {
