@@ -40,22 +40,24 @@
             String bookId = rs.getString("title");
             Timestamp startDateTimestamp = rs.getTimestamp("startDate");
             Timestamp endDateTimestamp = rs.getTimestamp("endDate");
+            
+            if(endDateTimestamp!=null){
+            	// startDate, endDate를 Date 객체로 변환
+                Date startDate = new Date(startDateTimestamp.getTime()+ (24 * 60 * 60 * 1000));
+                Date endDate = new Date(endDateTimestamp.getTime()+ (24 * 60 * 60 * 1000));
 
-            // startDate, endDate를 Date 객체로 변환
-            Date startDate = new Date(startDateTimestamp.getTime()+ (24 * 60 * 60 * 1000));
-            Date endDate = new Date(endDateTimestamp.getTime()+ (24 * 60 * 60 * 1000));
+                // 날짜를 ISO 8601 형식으로 변환
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+                sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
 
-            // 날짜를 ISO 8601 형식으로 변환
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-            sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+                // JSON 객체 생성하여 리스트에 추가
+                JSONObject event = new JSONObject();
+                event.put("title", bookId);
+                event.put("start", sdf.format(startDate));
+                event.put("end", sdf.format(endDate));
 
-            // JSON 객체 생성하여 리스트에 추가
-            JSONObject event = new JSONObject();
-            event.put("title", bookId);
-            event.put("start", sdf.format(startDate));
-            event.put("end", sdf.format(endDate));
-
-            eventsList.add(event);
+                eventsList.add(event);
+            }
         }
 
         // Convert the list to JSON array

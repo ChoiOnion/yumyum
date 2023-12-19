@@ -18,17 +18,17 @@
 
     try {
         // 자동으로 증가하는 변수를 저장할 AtomicInteger 객체 생성
-        AtomicInteger autoIncrement = (AtomicInteger) application.getAttribute("autoIncrement");
+        AtomicInteger autoIncrement2 = (AtomicInteger) application.getAttribute("autoIncrement2");
 
         // 만약에 객체가 없다면 초기값으로 설정
-        if (autoIncrement == null) {
-            autoIncrement = new AtomicInteger(1);
-            application.setAttribute("autoIncrement", autoIncrement);
+        if (autoIncrement2 == null) {
+        	autoIncrement2 = new AtomicInteger(0);
+            application.setAttribute("autoIncrement2", autoIncrement2);
         }
 
         // 다음 증가된 값을 얻어오고, application에 저장
-        int nextValue = autoIncrement.getAndIncrement();
-        application.setAttribute("autoIncrement", autoIncrement);
+        int nextValue = autoIncrement2.getAndIncrement();
+        application.setAttribute("autoIncrement2", autoIncrement2);
         
         String dbURL = "jdbc:mysql://localhost:3306/nyamnyam";
         String dbID = "root";

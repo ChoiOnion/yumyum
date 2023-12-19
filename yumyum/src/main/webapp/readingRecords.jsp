@@ -32,6 +32,7 @@
 
     <!-- 검색 결과 및 도서 추가 폼 -->
     <form method="post">
+    <div class="records-container">
         <%
         String searchType = request.getParameter("searchType");
         String searchQuery = request.getParameter("searchQuery");
@@ -69,8 +70,10 @@
 
                 while(rs.next()) {
                     hasResults = true;
+                    out.println("<div class='record-item'>");
                     out.println("<input type='checkbox' name='bookId' value='" + rs.getInt("bookId") + "'>");
                     out.println("<label>제목: " + rs.getString("title") + ", 글쓴이: " + rs.getString("writer") + ", 장르: " + rs.getString("genre") + ", 별점: " + rs.getDouble("starScore") + "</label><br>");
+                    out.println("</div>");
                 }
             } catch(Exception e) {
                 e.printStackTrace();
@@ -115,6 +118,7 @@
             }
         }
         %>
+        </div>
     </form>
     <!-- 독서 기록 목록 -->
     <h2>독서 기록 목록</h2>
