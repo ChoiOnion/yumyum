@@ -11,23 +11,23 @@
     
     <style>
 .record2-item {
-    border-bottom: 1px dashed #f4a406; 
+    border-bottom: 1px dashed #f4a406; /* Dashed border at the bottom */
     padding-bottom: 20px;
     margin-bottom: 20px;
-    width: 60%; 
+    width: 60%; /* Set width to 70% of the viewport width */
     box-sizing: border-box;
-    margin-left: auto; 
-    margin-right: auto; 
+    margin-left: auto; /* Center align the div */
+    margin-right: auto; /* Center align the div */
 }
 
     .record2-item span {
         margin-right: 10px;
-        font-size: 18px; 
+        font-size: 18px; /* 글씨 크기 조정 */
     }
 
     .record2-item select, .record-item input[type="submit"] {
-        padding: 8px 10px; 
-        font-size: 14px; 
+        padding: 8px 10px; /* 드롭다운 및 버튼의 패딩 및 크기 조정 */
+        font-size: 14px; /* 드롭다운 및 버튼의 글씨 크기 조정 */
     }
 
     .record2-item form {
@@ -52,6 +52,7 @@
     %>
     <jsp:include page="./navbar.jsp"></jsp:include>
 
+    <!-- 검색 폼 -->
     <form method="get">
         <select name="searchType">
             <option value="title">제목</option>
@@ -62,7 +63,9 @@
         <input type="submit" value="검색">
     </form>
 
+    <!-- 검색 결과 및 도서 추가 폼 -->
     <form method="post">
+    <div class="records-container">
         <%
         String searchType = request.getParameter("searchType");
         String searchQuery = request.getParameter("searchQuery");
@@ -93,15 +96,19 @@
                         break;
                 }
 
-                String sql = "SELECT * FROM book WHERE " + safeSearchType + " LIKE ?";
-                pstmt = conn.prepareStatement(sql);
+                String sql = "SELECT b.bookId, b.title, b.writer, b.genre, AVG(r.starScore) as avgScore " +
+                        "FROM book b LEFT JOIN record r ON b.bookId = r.bookId " +
+                        "WHERE " + safeSearchType + " LIKE ? " +
+                        "GROUP BY b.bookId, b.title, b.writer, b.genre";
+          		pstmt = conn.prepareStatement(sql);
                 pstmt.setString(1, "%" + searchQuery + "%");
                 rs = pstmt.executeQuery();
-
                 while(rs.next()) {
                     hasResults = true;
+                    out.println("<div class='record-item'>");
                     out.println("<input type='checkbox' name='bookId' value='" + rs.getInt("bookId") + "'>");
-                    out.println("<label>제목: " + rs.getString("title") + ", 글쓴이: " + rs.getString("writer") + ", 장르: " + rs.getString("genre") + ", 별점: " + rs.getDouble("starScore") + "</label><br>");
+                    out.println("<label>제목: " + rs.getString("title") + ", 글쓴이: " + rs.getString("writer") + ", 장르: " + rs.getString("genre") + ", 평균별점: " + String.format("%.1f", rs.getDouble("avgScore")) + "</label><br>");
+                    out.println("</div>");
                 }
             } catch(Exception e) {
                 e.printStackTrace();
@@ -118,6 +125,7 @@
             }
         }
 
+        // 도서 추가
         String[] bookIds = request.getParameterValues("bookId");
         if (loggedInUserId != null && "POST".equalsIgnoreCase(request.getMethod()) && bookIds != null) {
             try {
@@ -145,8 +153,10 @@
             }
         }
         %>
+        </div>
     </form>
 
+    <!-- 독서 기록 목록 -->
     <h2>독서 기록 목록</h2>
     <%
     if (loggedInUserId != null) {
