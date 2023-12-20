@@ -11,23 +11,23 @@
     
     <style>
 .record2-item {
-    border-bottom: 1px dashed #f4a406; /* Dashed border at the bottom */
+    border-bottom: 1px dashed #f4a406; 
     padding-bottom: 20px;
     margin-bottom: 20px;
-    width: 60%; /* Set width to 70% of the viewport width */
+    width: 60%; 
     box-sizing: border-box;
-    margin-left: auto; /* Center align the div */
-    margin-right: auto; /* Center align the div */
+    margin-left: auto; 
+    margin-right: auto; 
 }
 
     .record2-item span {
         margin-right: 10px;
-        font-size: 18px; /* 글씨 크기 조정 */
+        font-size: 18px; 
     }
 
     .record2-item select, .record-item input[type="submit"] {
-        padding: 8px 10px; /* 드롭다운 및 버튼의 패딩 및 크기 조정 */
-        font-size: 14px; /* 드롭다운 및 버튼의 글씨 크기 조정 */
+        padding: 8px 10px; 
+        font-size: 14px; 
     }
 
     .record2-item form {
@@ -52,7 +52,6 @@
     %>
     <jsp:include page="./navbar.jsp"></jsp:include>
 
-    <!-- 검색 폼 -->
     <form method="get">
         <select name="searchType">
             <option value="title">제목</option>
@@ -63,7 +62,6 @@
         <input type="submit" value="검색">
     </form>
 
-    <!-- 검색 결과 및 도서 추가 폼 -->
     <form method="post">
     <div class="records-container">
         <%
@@ -125,7 +123,6 @@
             }
         }
 
-        // 도서 추가
         String[] bookIds = request.getParameterValues("bookId");
         if (loggedInUserId != null && "POST".equalsIgnoreCase(request.getMethod()) && bookIds != null) {
             try {
@@ -156,7 +153,6 @@
         </div>
     </form>
 
-    <!-- 독서 기록 목록 -->
     <h2>독서 기록 목록</h2>
     <%
     if (loggedInUserId != null) {
@@ -202,7 +198,6 @@
         }
     }
    
-        // 독서 상태 및 endDate 변경 처리
         PreparedStatement pstmtUpdate = null;
         try {
             String bookIdToUpdate = request.getParameter("bookId");
@@ -223,8 +218,8 @@
 
                 int rowsAffected = pstmtUpdate.executeUpdate();
                 if (rowsAffected > 0 && "독서완료".equals(newStatus)) {
-                    response.sendRedirect("writingReview.jsp?bookId=" + bookIdToUpdate); // 서평 작성 페이지로 리디렉션
-                    return; // 추가 처리 방지
+                    response.sendRedirect("writingReview.jsp?bookId=" + bookIdToUpdate); 
+                    return;
                 }
             }
         } catch(Exception e) {
